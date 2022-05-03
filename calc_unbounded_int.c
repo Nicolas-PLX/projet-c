@@ -9,7 +9,7 @@
 //Structure permettant de stocker les variables que nous lirons.
 typedef struct variable{
     char *nom;
-    unbounded_int valeur;
+    unbounded_int *valeur;
 }variable;
 
 //Creation d'une liste pour stocker les variables du programme.
@@ -24,7 +24,7 @@ typedef struct liste_variable{
 }liste_variable;
 
 static variable *new_var(char *nom, char *valeur){
-    unbounded_int val = string2unbounded_int(valeur);
+    unbounded_int *val = string2unbounded_int(valeur);
     if(val->signe != '*'){
         variable *var = malloc(sizeof(variable));    
         if (var == NULL){
@@ -53,8 +53,15 @@ static liste_variable *initialisation(){
 
     return liste;
 }
-
+/*Fonction qui permet d'ajouter une variable dans une liste.
+*Nous devons neanmoins verifier que la variable n'est pas deja dans la liste.
+*/
 static void insertion(liste_variable *liste, variable *a){
+    variable *verif = get_variable(liste,a->nom);
+    if (verif != NULL){
+        free(verif);
+        return NULL;
+    }
     element *nouveau = (element *)malloc(sizeof(element));
     if (liste == NULL || nouveau == NULL){
         exit(EXIT_FAILURE);
@@ -131,14 +138,17 @@ static int arg_valable(char *mot){
 }
 
 //Fonction qui verifie que la chaine est bien un nombre, en verifiant les characteres ASCII
+//pour nous, un nombre peut aussi avoir "+" et "-" au debut de son nom, pour le signe du nombre.
 static int nombre_valable(char *nombre){
     int n = strlen(nombre);
     int i = 0;
     int val_ascii = 0;
-    while(mot[i] != "\0"){
-        val_ascii = (int)mot[i];
-        if(val_ascii < 48 || val_ascii > 57){
-            return 0;
+    while(nombre[i] != "\0"){
+        val_ascii = (int)nombre[i];
+        if(val_ascii < 48 || val_ascii > 57){ //Valeur ASCII de 0 et de 9
+            if (val_ascii != 43 && val_ascii != 45){ //valeur ASCII du + et -
+                return 0;
+            }
         }
         i++;
     }
@@ -184,25 +194,27 @@ static int index_option_i(char **argv){
 /*Fonction qui va effectuer le calcul que l'on trouve dans la lecture.
 @param "res" pour le resultat du calcul, "a" pour la premiere variable, "b" pour la seconde variable, et "operation" pour le signe de l'operation effectue.*/
 
-static void calcul(variable *res, variable *a, variable *b, char *operation ){
-    //TODO : vérifier que res existe
+static void calcul_var(variable *res, char *a, char *b, char *operation){
+    unbounded_int *int_a = string2unbounded_int(a);
+    unbounded_int *int_b = string2unbounded_int(b);
     if (strcmp(operation,"+") == 0){
-        // unbounded_int calc = unbounded_int_somme(a->valeur,b->valeur);
+        // unbounded_int *calc = unbounded_int_somme(a,b);
         // res-> valeur = calc;
     }
     if (strcmp(operation,"/") == 0){
-        // unbounded_int calc = unbounded_int_quotient(a->valeur,b->valeur);
+        // unbounded_int *calc = unbounded_int_quotient(a,b);
         // res-> valeur = calc;
     }
     if (strcmp(operation,"-") == 0){
-        // unbounded_int calc = unbounded_int_difference(a->valeur,b->valeur);
+        // unbounded_int *calc = unbounded_int_difference(a,b);
         // res-> valeur = calc;
     }
     if (strcmp(operation,"*") == 0){
-        // unbounded_int calc = unbounded_int_produit(a->valeur,b->valeur);
+        // unbounded_int *calc = unbounded_int_produit(a,b);
         // res-> valeur = calc;
     }
 }
+
 /*Fonction qui permet d'afficher la valeur de la variable correspondant a la string "nom".
 *@params nom la variable portant cette string, "boolean" qui indique si l'option o a été mise,
 *"liste" qui va nous permettre de recuperer la variable si elle existe,
@@ -234,14 +246,17 @@ void lecture(char **argv){
     liste_variable *l_var = initialisation();
 
     //Cas ou l'option i est utilise :
+    FILE *inputFile = stdin;
     if (bool_i == 1){
-        FILE *inputFile = fopen(argv[1],"r+");
+        int index_i = index_option_i(argv);
+        inputFile = fopen(argv[index_i],"r+");
+    }
         if (inputFile == NULL){
             printf("Ne peut pas ouvrir le fichier %s\n", argv[1]);
             exit(EXIT_FAILURE);
         }
         //On lis le fichier
-        while (feof(inputFile)){
+        while (!feof(inputFile)){
             fgets(buffer,LEN,inputFile);
 
             if (ferror(inputFile)){
@@ -272,7 +287,7 @@ void lecture(char **argv){
                        
                         variable *var = get_variable(l_var,tableau_sep[0]);
                         if (var != NULL){
-                            unbounded_int valeur = string2unbounded_int(tableau_sep[1]);
+                            unbounded_int *valeur = string2unbounded_int(tableau_sep[1]);
                             var->valeur = valeur;
                         } else {
                             variable *nv_var = new_var(tableau_sep[0],tableau_sep[1]);
@@ -280,25 +295,48 @@ void lecture(char **argv){
                             free(var); //On libere l'espace pris pour l'ancienne var
                         }
                     } else { //Cas ou nous avons une operation
-                    //TODO : regarder si tab[1] et tab[3] sont des chiffres (fonction nombre_valable)
-                    // si c'est le cas, on appelle directement la fonction de calcul
-                    //sinon, on vérifie si ce sont des variables valables
-                    //si c'est le cas, on appelle la fonction de calcul, sinon on stop le processus
-
+                    //On verifie que l'operation est valide.
+                    if(tableau_sep[2] != "+" && tableau_sep[2] != "/" && tableau_sep[2] != "*" && tableau_sep[2] != "-"){
+                        printf("Calcul invalide");
+                        fclose(inputFile);
+                        exit(EXIT_FAILURE);
                     }
-                } else {
+                    variable *var_res = get_variable(l_var,tableau_sep[0]);
+                    //On regarde ensuite le cas ou nous avons 2 variables (ex : " a * a")
+                    if (arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
+                        variable *var_a = get_variable(l_var,tableau_sep[1]);
+                        variable *var_b = get_variable(l_var,tableau_sep[3]);
+                        calcul(var_res,unbounded_int2string(var_a->valeur),unbounded_int2string(var_b->valeur),tableau_sep[2]);
+                    } else {
+                        //On regarde ensuite le cas ou les deux sont des nombres (ex : "3 + 5")
+                        if(nombre_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
+                            calcul(var_res,tableau_sep[1],tableau_sep[3],tableau_sep[2]);    
+                        } else {
+                        //On regarde ensuite le cas ou le premier argument est une variable, et le deuxieme un nombre (ex : "a * 3")
+                            if(arg_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
+                                variable *var_a = get_variable(l_var,tableau_sep[1]);
+                                calcul(var_res,unbounded_int2string(var_a->valeur),tableau_sep[3],tableau_sep[2]);
+                            } else {
+                                //enfin, on regarde si le premier argument est un nombre et le deuxieme une variable (ex : "3 * a")
+                                if(nombre_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
+                                    variable *var_b = get_variable(l_var,tableau_sep[3]);
+                                    calcul(var_res,tableau_sep[1],unbounded_int2string(var_b->valeur),tableau_sep[2]);
+                                } else {
+                                    printf("Calcul invalide");
+                                    fclose(inputFile);
+                                    exit(EXIT_FAILURE);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
                     printf("Variable non conforme");
                     exit(EXIT_FAILURE);
                 }
              }
-
-
-            //Maintenant on analyse chaque element
         }
-
-
-
-    }
+    fclose(inputFile);
     free(buffer);    
 }
 
