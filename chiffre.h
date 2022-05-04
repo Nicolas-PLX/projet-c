@@ -8,5 +8,6 @@ typedef struct chiffre {
 } chiffre;
 
 chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent);
+chiffre *chiffre_creer_char(char c);
 
 #endif

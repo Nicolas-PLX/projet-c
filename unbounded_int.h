@@ -15,7 +15,6 @@ typedef struct {
 } unbounded_int;
 
 unbounded_int *unbounded_int_creer(void);
-char unbounded_int_signe(unbounded_int *i, char signe);
 unbounded_int *unbounded_int_ajouter_chiffre(unbounded_int *i, chiffre *c);
 unbounded_int *unbounded_int_ajouter_char(unbounded_int *i, char c);
 
