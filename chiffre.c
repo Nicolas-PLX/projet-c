@@ -19,6 +19,6 @@ chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent) {
     return tmp;
 }
 
-int main() {
-
+chiffre *chiffre_creer_char(char c) {
+    return chiffre_creer(NULL, c, NULL);
 }

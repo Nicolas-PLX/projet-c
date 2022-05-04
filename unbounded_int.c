@@ -18,6 +18,7 @@ static int verification(const unbounded_int *i) {
     }
 }
 
+//Creer un unbounded_int valant 0
 static unbounded_int *unbounded_int_creer_zero() {
     unbounded_int *tmp = malloc(sizeof(unbounded_int));
     if(tmp == NULL) {
@@ -29,6 +30,7 @@ static unbounded_int *unbounded_int_creer_zero() {
     return tmp;
 }
 
+//Creer un unbounded_int vide
 unbounded_int *unbounded_int_creer() {
     unbounded_int *tmp = malloc(sizeof(unbounded_int));
     if(tmp == NULL) {
@@ -40,6 +42,7 @@ unbounded_int *unbounded_int_creer() {
     return tmp;
 }
 
+//Ajouter un chiffre a la fin d'un unbounded_int
 unbounded_int *unbounded_int_ajouter_chiffre_fin(unbounded_int *i, chiffre *c) {
     if(verification(i)) {
         if(i -> premier == NULL) {
@@ -55,6 +58,7 @@ unbounded_int *unbounded_int_ajouter_chiffre_fin(unbounded_int *i, chiffre *c) {
     return i;
 }
 
+//Ajouter un caractere valant un chiffre a la fin d'un unbounded_int
 unbounded_int *unbounded_int_ajouter_char_fin(unbounded_int *i, char c) {
     chiffre *tmp = chiffre_creer_char(c);
     if(tmp == NULL) {
@@ -63,20 +67,10 @@ unbounded_int *unbounded_int_ajouter_char_fin(unbounded_int *i, char c) {
         }
         return i;
     }
-    if(verification(i)) {
-        if(i -> premier == NULL) {
-            i -> premier = tmp;
-            i -> dernier = tmp;
-        } else {
-            i -> dernier -> suivant = tmp;
-            tmp -> precedent = i -> dernier;
-            i -> dernier = tmp;
-        }
-        i -> len += 1;
-    }
-    return i;
+    return unbounded_int_ajouter_chiffre_fin(i, tmp);
 }
 
+//Ajouter un chiffre au debut d'un unbounded_int
 unbounded_int *unbounded_int_ajouter_chiffre_debut(unbounded_int *i, chiffre *c) {
     if(verification(i)) {
         if(i -> premier == NULL) {
@@ -92,6 +86,7 @@ unbounded_int *unbounded_int_ajouter_chiffre_debut(unbounded_int *i, chiffre *c)
     return i;
 }
 
+//Ajouter un caractere valant un chiffre au debut d'un unbounded_int
 unbounded_int *unbounded_int_ajouter_char_debut(unbounded_int *i, char c) {
     chiffre *tmp = chiffre_creer_char(c);
     if(tmp == NULL) {
@@ -100,20 +95,10 @@ unbounded_int *unbounded_int_ajouter_char_debut(unbounded_int *i, char c) {
         }
         return i;
     }
-    if(verification(i)) {
-        if(i -> premier == NULL) {
-            i -> premier = tmp;
-            i -> dernier = tmp;
-        } else {
-            i -> premier -> precedent = tmp;
-            tmp -> suivant = i -> premier;
-            i -> premier = tmp;
-        }
-        i -> len += 1;
-    }
-    return i;
+    return unbounded_int_ajouter_chiffre_debut(i, tmp);
 }
 
+//Convertir une chaine de caractere en un unbounded_int
 unbounded_int string2unbounded_int(const char *e) {
     unbounded_int *tmp = unbounded_int_creer();
     int cpt = 0;
@@ -129,6 +114,7 @@ unbounded_int string2unbounded_int(const char *e) {
     return *tmp;
 }
 
+//Convertir un long long en un unbounded_int
 unbounded_int ll2unbounded_int(long long i) {
     unbounded_int *tmp = unbounded_int_creer();
     char e[UNKNOW_SIZE]; 
@@ -146,6 +132,7 @@ unbounded_int ll2unbounded_int(long long i) {
     return *tmp;
 }
 
+//Convertir un unbounded_int en une chaine de caracteres
 char *unbounded_int2string(unbounded_int i) {
     int len = i.len,
         cpt = 0;
@@ -169,6 +156,10 @@ char *unbounded_int2string(unbounded_int i) {
     return e;
 }
 
+/* Comparer deux unbounded_int a et b
+   Retourne -1 si a < b
+             0 si a = b
+             1 si a > b */
 int unbounded_int_cmp_unbounded_int(unbounded_int a, unbounded_int b) {
     if(a.signe == '-' && b.signe == '+') {
         return -1;
@@ -211,11 +202,19 @@ int unbounded_int_cmp_unbounded_int(unbounded_int a, unbounded_int b) {
     return 0;
 }
 
+/* Comparer un unbounded_int a et un long long b
+   Retourne -1 si a < b
+             0 si a = b
+             1 si a > b */
 int unbounded_int_cmp_ll(unbounded_int a, long long b) {
     unbounded_int b_bis = ll2unbounded_int(b);
     return unbounded_int_cmp_unbounded_int(a, b_bis);
 }
 
+/* Comparer la valeur absolue de deux unbounded_int a et b
+   Retourne -1 si |a| < |b|
+             0 si |a| = |b|
+             1 si |a| > |b| */
 static int unbounded_int_cmp_unbounted_int_no_sign(unbounded_int a, unbounded_int b) {
     if(a.len < b.len) {
         return -1;
@@ -245,15 +244,17 @@ static int unbounded_int_cmp_unbounted_int_no_sign(unbounded_int a, unbounded_in
     return 0;
 }
 
+//Calculer la somme de deux unbounded_int a et b
 unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
-    unbounded_int *res = unbounded_int_creer();
-    int retenu = 0;
+    unbounded_int *res = unbounded_int_creer(); //Unbounded_int contenant le resultat de l'addition
+    int retenu = 0; //Int representant la retenu dans une addition
     chiffre *i = a.dernier,
             *j = b.dernier;
     while(i != NULL && j != NULL) {
         int int_i = i -> c - '0',
             int_j = j -> c - '0',
             somme;
+        //Calcul de la somme des deux chiffres
         if(a.signe == '-' && b. signe == '+') {
             somme = int_j - int_i + retenu;
         } else if(a.signe == '+' && b.signe == '-'){
@@ -261,10 +262,13 @@ unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
         } else {
             somme = int_i + int_j + retenu;
         }
+        //Reinitialisation de la retenu après utilisation
         retenu = 0;
+        //Mis en place de la retenu si besoin
         if(somme >= 10) {
             retenu = 1;
         }
+        //Ajout du résultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", somme);
         if(retenu == 0) {
@@ -275,18 +279,23 @@ unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
         i = i -> precedent;
         j = j -> precedent;
     }
+    //Cas ou le unbounded_int a est plus long que le unbounded_int b
     while(i != NULL) {
         int int_i = i -> c - '0',
             somme;
+        //Calcul de la somme
         if(a.signe == '-') {
             somme = int_i - retenu;
         } else {
             somme = retenu + int_i;
         }
+        //Reinitialisation de la retenu après utilisation
         retenu = 0;
+        //Mis en place de la retenu si besoin
         if(somme >= 10) {
             retenu = 1;
         }
+        //Ajout du résultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", somme);
         if(retenu == 0) {
@@ -296,18 +305,23 @@ unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
         }
         i = i -> precedent;
     }
+    //Cas ou le unbounded_int b est plus long que le unbounded_int a
     while(j != NULL) {
         int int_j = j -> c - '0',
             somme;
+        //Calcul de la somme
         if(b.signe == '-') {
             somme = int_j - retenu;
         } else {
             somme = retenu + int_j;
         }
+        //Reinitialisation de la retenu après utilisation
         retenu = 0;
+        //Mis en place de la retenu si besoin
         if(somme >= 10) {
             retenu = 1;
         }
+        //Ajout du résultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", somme);
         if(retenu == 0) {
@@ -317,9 +331,11 @@ unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
         }
         j = j -> precedent;
     }
+    //Ajout de la retenu si elle existe toujours lorsqu'on finit d'additionner a et b
     if(retenu == 1) {
         unbounded_int_ajouter_char_debut(res, '1');
     }
+    //Mis en place du signe du resultat
     if(a.signe == '+' && b.signe == '+') {
         res -> signe = '+';
     } else if(a.signe == '-' && b.signe == '-') {
@@ -340,11 +356,13 @@ unbounded_int unbounded_int_somme(unbounded_int a, unbounded_int b) {
     return *res;
 }
 
+//Calculer la difference de deux unbounded_int a et b
 unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
     unbounded_int *res = unbounded_int_creer();
     int retenu = 0;
     chiffre *i = a.dernier,
             *j = b.dernier;
+    //Cas ou la valeur de a est strinctement plus petite à celle de b
     if(unbounded_int_cmp_unbounted_int_no_sign(a, b) == -1) {
         i = b.dernier;
         j = a.dernier;
@@ -353,6 +371,7 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
         int int_i = i -> c - '0',
             int_j = j -> c - '0',
             difference;
+        //Calcul de la difference
         if(a.signe == '+' && b.signe == '+') { 
             if(int_i < int_j) {
                 difference = CONST_SOUSTRACTION + int_i - int_j + retenu;
@@ -370,39 +389,47 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
                 retenu = 0;
             }
         } else {
-            if(int_i < int_j) {
-
-            }
             difference = int_i + int_j + retenu;
             retenu = 0;
             if(difference >= 10) {
                 retenu = 1;
             }
         }
+        //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
         unbounded_int_ajouter_char_debut(res, chiffre[0]);
         i = i -> precedent;
         j = j -> precedent;
     }
+    //Cas ou a est plus long que b
     while(i != NULL) {
         int int_i = i -> c - '0',
             difference;
+        //Calcul de la difference
         difference = int_i - retenu;
+        //Reinitialisation de la retenu
         retenu = 0;
+        //La retenu ne changera pas, car on suppose que a ne commencera jamais par un nombre quelconque de 0
+        //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
         unbounded_int_ajouter_char_debut(res, chiffre[0]);
         i = i -> precedent;
     }
+    //Cas ou b est plus long que a
     while(j != NULL) {
         int int_j = j -> c - '0',
             difference;
+        //Calcul de la difference
         difference = int_j + retenu;
+        //Reinitialisation de la retenu
         retenu = 0;
+        //Mis en place de la retenu
         if(difference >= 10) {
             retenu = 1;
         }
+        //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
         if(retenu == 0) {
@@ -412,9 +439,11 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
         }
         j = j -> precedent;
     }
+    //Cas ou il existe toujours une retenu apres avoir soustrait b a a
     if(retenu == 1) {
         unbounded_int_ajouter_char_debut(res, '1');
     }
+    //Mis en place du signe du resultat
     if(a.signe == '+' && b.signe == '+') {
         if(unbounded_int_cmp_unbounted_int_no_sign(a, b) == 1) {
             res -> signe = '+';
@@ -435,6 +464,7 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
     return *res;
 }
 
+//Calculer 10 a un certaine puissance n
 static int dix_puissance(int acc, int n) {
     if(n == 0) {
         return acc;
@@ -442,6 +472,7 @@ static int dix_puissance(int acc, int n) {
     return dix_puissance(acc * 10, n - 1);
 }
 
+//Calculer le prosuit de deux unbounded_int a et b
 unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     unbounded_int *tmp = unbounded_int_creer(),
                   *somme = unbounded_int_creer_zero();
@@ -454,11 +485,15 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
         int int_j = j -> c - '0';
         while(i != NULL) {
             int int_i = i -> c - '0';
+            //Calcul du produit
             produit = int_j * int_i + retenu;
+            //Reinitialisation de la retenu
             retenu = 0;
+            //Ajout du resultat du produit
             char chiffre[SIZE_INT_IN_STRING];
             sprintf(chiffre, "%d", produit);
             if(produit >= 10) {
+                //Mis en place de la retenu
                 retenu = chiffre[0] - '0';
                 unbounded_int_ajouter_char_debut(tmp, chiffre[1]);
             } else {
@@ -469,15 +504,18 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
         char *produit_in_char = unbounded_int2string(*tmp),
              *ptrEnd;
         long long produit_in_long_long = strtoll(produit_in_char, &ptrEnd, 10);
+        //Ajout du decalage
         if(cpt > 0) {
             produit_in_long_long *= dix_puissance(1, cpt);
         }
+        //Addition du produit
         unbounded_int produit_in_unbounded_int = ll2unbounded_int(produit_in_long_long);
         *somme = unbounded_int_somme(*somme, produit_in_unbounded_int);
         tmp = unbounded_int_creer();
         cpt++;
         j = j -> precedent;
     }
+    //Mis en place du signe du resultat
     if((a.signe == '+' && b.signe == '+') || (a.signe == '-' && b.signe == '-')) {
         somme -> signe = '+';
     } else {
@@ -546,6 +584,6 @@ int main() {
 
     unbounded_int chiffre14 = unbounded_int_produit(chiffre13, chiffre1);
     char *tmp14 = unbounded_int2string(chiffre14);
-    printf("Chiffre 5 = %s * %s = %s\n", tmp13, tmp1, tmp14);
+    printf("Chiffre 14 = %s * %s = %s\n", tmp13, tmp1, tmp14);
 }
 
