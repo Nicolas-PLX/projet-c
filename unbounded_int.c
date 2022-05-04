@@ -4,25 +4,11 @@
 #include <ctype.h>
 
 #include "unbounded_int.h"
-//#include "chiffre.h"
+#include "chiffre.h"
 
 #define SIZE_INT_IN_STRING 3
 #define CONST_SOUSTRACTION 10
 #define UNKNOW_SIZE 256
-
-chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent) {
-    if(!isdigit(c)) {
-        return NULL;
-    }
-    chiffre *tmp = malloc(sizeof(chiffre));
-    if(tmp == NULL) {
-        return NULL;
-    }
-    tmp -> suivant = suivant;
-    tmp -> c = c;
-    tmp -> precedent = precedent;
-    return tmp;
-}
 
 static int verification(const unbounded_int *i) {
     if(i -> signe == '*') {
