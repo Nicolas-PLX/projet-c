@@ -5,7 +5,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "chiffre.h"
+//#include "chiffre.h"
+
+typedef struct chiffre {
+    struct chiffre  *suivant;
+    char c;
+    struct chiffre *precedent;
+} chiffre;
+
+chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent);
 
 typedef struct {
     char signe; /* soit ’+’ soit ’-’ */ 

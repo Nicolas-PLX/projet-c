@@ -4,11 +4,25 @@
 #include <ctype.h>
 
 #include "unbounded_int.h"
-#include "chiffre.h"
+//#include "chiffre.h"
 
 #define SIZE_INT_IN_STRING 3
 #define CONST_SOUSTRACTION 10
 #define UNKNOW_SIZE 256
+
+chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent) {
+    if(!isdigit(c)) {
+        return NULL;
+    }
+    chiffre *tmp = malloc(sizeof(chiffre));
+    if(tmp == NULL) {
+        return NULL;
+    }
+    tmp -> suivant = suivant;
+    tmp -> c = c;
+    tmp -> precedent = precedent;
+    return tmp;
+}
 
 static int verification(const unbounded_int *i) {
     if(i -> signe == '*') {
@@ -126,7 +140,10 @@ unbounded_int ll2unbounded_int(long long i) {
     sprintf(e, "%lld", i);
     int cpt = 0;
     while(e[cpt] != '\0') {
-        tmp = unbounded_int_ajouter_char_debut(tmp, e[cpt]);
+        if(isdigit(e[cpt])) {
+            tmp = unbounded_int_ajouter_char_debut(tmp, e[cpt]);
+            printf("%c\n", e[cpt]);
+        }
         cpt++;
     }
     if(i < 0) {
@@ -496,6 +513,11 @@ int main() {
     /*unbounded_int chiffre7 = unbounded_int_difference(chiffre2, chiffre3);
     char *tmp7 = unbounded_int2string(chiffre7);
     printf("%s\n", tmp7);*/
+
+    long long chiffre_long_long = -10;
+    unbounded_int chiffre8 = ll2unbounded_int(chiffre_long_long);
+    char *tmp8 = unbounded_int2string(chiffre8);
+    printf("%s\n", tmp8);
     
 }
 
