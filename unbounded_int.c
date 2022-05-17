@@ -481,7 +481,7 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     }
     return *somme;
 }
-
+/*
 int main() {
 
     char chiffre_string1[] = "1234567890";
@@ -505,7 +505,7 @@ int main() {
     /*unbounded_int chiffre5 = unbounded_int_produit(chiffre1, chiffre2);
     char *tmp5 = unbounded_int2string(chiffre5);
     printf("%s\n", tmp5);*/
-
+/*
     unbounded_int chiffre6 = unbounded_int_somme(chiffre2, chiffre1);
     char *tmp6 = unbounded_int2string(chiffre6);
     printf("%s\n", tmp6);
@@ -513,11 +513,11 @@ int main() {
     /*unbounded_int chiffre7 = unbounded_int_difference(chiffre2, chiffre3);
     char *tmp7 = unbounded_int2string(chiffre7);
     printf("%s\n", tmp7);*/
-
+/*
     long long chiffre_long_long = -10;
     unbounded_int chiffre8 = ll2unbounded_int(chiffre_long_long);
     char *tmp8 = unbounded_int2string(chiffre8);
     printf("%s\n", tmp8);
     
 }
-
+*/
