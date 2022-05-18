@@ -5,15 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-//#include "chiffre.h"
-
-typedef struct chiffre {
-    struct chiffre  *suivant;
-    char c;
-    struct chiffre *precedent;
-} chiffre;
-
-chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent);
+#include "chiffre.h"
 
 typedef struct {
     char signe; /* soit ’+’ soit ’-’ */ 
@@ -23,7 +15,6 @@ typedef struct {
 } unbounded_int;
 
 unbounded_int *unbounded_int_creer(void);
-char unbounded_int_signe(unbounded_int *i, char signe);
 unbounded_int *unbounded_int_ajouter_chiffre(unbounded_int *i, chiffre *c);
 unbounded_int *unbounded_int_ajouter_char(unbounded_int *i, char c);
 
