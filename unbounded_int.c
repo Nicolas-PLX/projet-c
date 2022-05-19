@@ -4,11 +4,30 @@
 #include <ctype.h>
 
 #include "unbounded_int.h"
-#include "chiffre.h"
 
 #define SIZE_INT_IN_STRING 3
 #define CONST_SOUSTRACTION 10
 #define UNKNOW_SIZE 256
+
+//Creer un chiffre en précisant s'il est suivi ou precede d'un autre chiffre
+static chiffre *chiffre_creer(chiffre *suivant, char c, chiffre *precedent) {
+    if(!isdigit(c)) {
+        return NULL;
+    }
+    chiffre *tmp = malloc(sizeof(chiffre));
+    if(tmp == NULL) {
+        return NULL;
+    }
+    tmp -> suivant = suivant;
+    tmp -> c = c;
+    tmp -> precedent = precedent;
+    return tmp;
+}
+
+//Creer un chiffre
+static chiffre *chiffre_creer_char(char c) {
+    return chiffre_creer(NULL, c, NULL);
+}
 
 static int verification(const unbounded_int *i) {
     if(i -> signe == '*') {
@@ -31,7 +50,7 @@ static unbounded_int *unbounded_int_creer_zero() {
 }
 
 //Creer un unbounded_int vide
-unbounded_int *unbounded_int_creer() {
+static unbounded_int *unbounded_int_creer() {
     unbounded_int *tmp = malloc(sizeof(unbounded_int));
     if(tmp == NULL) {
         tmp -> signe = '*';
@@ -43,7 +62,7 @@ unbounded_int *unbounded_int_creer() {
 }
 
 //Ajouter un chiffre a la fin d'un unbounded_int
-unbounded_int *unbounded_int_ajouter_chiffre_fin(unbounded_int *i, chiffre *c) {
+static unbounded_int *unbounded_int_ajouter_chiffre_fin(unbounded_int *i, chiffre *c) {
     if(verification(i)) {
         if(i -> premier == NULL) {
             i -> premier = c;
@@ -59,7 +78,7 @@ unbounded_int *unbounded_int_ajouter_chiffre_fin(unbounded_int *i, chiffre *c) {
 }
 
 //Ajouter un caractere valant un chiffre a la fin d'un unbounded_int
-unbounded_int *unbounded_int_ajouter_char_fin(unbounded_int *i, char c) {
+static unbounded_int *unbounded_int_ajouter_char_fin(unbounded_int *i, char c) {
     chiffre *tmp = chiffre_creer_char(c);
     if(tmp == NULL) {
         if(!verification(i)) {
@@ -71,7 +90,7 @@ unbounded_int *unbounded_int_ajouter_char_fin(unbounded_int *i, char c) {
 }
 
 //Ajouter un chiffre au debut d'un unbounded_int
-unbounded_int *unbounded_int_ajouter_chiffre_debut(unbounded_int *i, chiffre *c) {
+static unbounded_int *unbounded_int_ajouter_chiffre_debut(unbounded_int *i, chiffre *c) {
     if(verification(i)) {
         if(i -> premier == NULL) {
             i -> premier = c;
@@ -87,7 +106,7 @@ unbounded_int *unbounded_int_ajouter_chiffre_debut(unbounded_int *i, chiffre *c)
 }
 
 //Ajouter un caractere valant un chiffre au debut d'un unbounded_int
-unbounded_int *unbounded_int_ajouter_char_debut(unbounded_int *i, char c) {
+static unbounded_int *unbounded_int_ajouter_char_debut(unbounded_int *i, char c) {
     chiffre *tmp = chiffre_creer_char(c);
     if(tmp == NULL) {
         if(!verification(i)) {
@@ -363,7 +382,7 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
     chiffre *i = a.dernier,
             *j = b.dernier;
     //Cas ou la valeur de a est strinctement plus petite à celle de b
-    if(unbounded_int_cmp_unbounted_int_no_sign(a, b) == -1) {
+    if(unbounded_int_cmp_unbounded_int(a, b) == -1) {
         i = b.dernier;
         j = a.dernier;
     }
@@ -398,7 +417,11 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
         //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
-        unbounded_int_ajouter_char_debut(res, chiffre[0]);
+        if(retenu == 0) {
+            unbounded_int_ajouter_char_debut(res, chiffre[0]);
+        } else {
+            unbounded_int_ajouter_char_debut(res, chiffre[1]);
+        }
         i = i -> precedent;
         j = j -> precedent;
     }
@@ -472,7 +495,7 @@ static int dix_puissance(int acc, int n) {
     return dix_puissance(acc * 10, n - 1);
 }
 
-//Calculer le prosuit de deux unbounded_int a et b
+//Calculer le produit de deux unbounded_int a et b
 unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     unbounded_int *tmp = unbounded_int_creer(),
                   *somme = unbounded_int_creer_zero();
@@ -523,6 +546,26 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     }
     return *somme;
 }
+
+//Calculer le quotien de la division entiere d'un unbounded_int a par un unbounded_int b
+unbounded_int unbounded_int_quotien(unbounded_int a, unbounded_int b) {
+    if(unbounded_int_cmp_unbounted_int_no_sign(a, b) == -1) {
+        return *unbounded_int_creer_zero();
+    }
+    unbounded_int *res = unbounded_int_creer();
+    
+    return *res;
+}
+
+//Calculer le reste de la division d'un unbounded_int a par un unbounded_int b
+unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
+    if(unbounded_int_cmp_unbounted_int_no_sign(a, b) == -1) {
+        char *tmp = unbounded_int2string(a);
+        return string2unbounded_int(tmp);
+    }
+    return *unbounded_int_creer();
+}
+
 
 int main() {
 
@@ -585,5 +628,9 @@ int main() {
     unbounded_int chiffre14 = unbounded_int_produit(chiffre13, chiffre1);
     char *tmp14 = unbounded_int2string(chiffre14);
     printf("Chiffre 14 = %s * %s = %s\n", tmp13, tmp1, tmp14);
+
+    unbounded_int chiffre15 = unbounded_int_produit(chiffre14, chiffre13);
+    char *tmp15 = unbounded_int2string(chiffre15);
+    printf("Chiffre 15 = %s * %s = %s\n", tmp14, tmp13, tmp15);
 }
 

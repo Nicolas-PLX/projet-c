@@ -1,4 +1,4 @@
-#include "unbounded_int.c"
+#include "unbounded_int.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,14 +25,14 @@ typedef struct liste_variable{
 
 static variable *new_var(char *nom, char *valeur){
     unbounded_int val = string2unbounded_int(valeur);
-    if(val->signe != '*'){
+    if(val.signe != '*') {
         variable *var = malloc(sizeof(variable));    
         if (var == NULL){
             exit(EXIT_FAILURE);
         }
-    var->nom = nom;
-    var->valeur = val;
-    return var;
+        var->nom = nom;
+        var->valeur = val;
+        return var;
     } else {
         exit(EXIT_FAILURE);
     }
