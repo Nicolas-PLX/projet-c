@@ -589,15 +589,14 @@ int main() {
 
     unbounded_int chiffre5 = unbounded_int_produit(chiffre1, chiffre2);
     char *tmp5 = unbounded_int2string(chiffre5);
-    printf("%s\n", tmp5);
     printf("Chiffre 5 = %s * %s = %s\n", tmp1, tmp2, tmp5);
 
     unbounded_int chiffre6 = unbounded_int_somme(chiffre2, chiffre1);
     char *tmp6 = unbounded_int2string(chiffre6);
     printf("Chiffre 6 = %s + %s = %s\n", tmp2, tmp1, tmp6);
 
-    long long chiffre_long_long = -10;
-    unbounded_int chiffre7 = ll2unbounded_int(chiffre_long_long);
+    unbounded_int chiffre7 = unbounded_int_difference(chiffre2, chiffre1);
+    char *tmp7 = unbounded_int2string(chiffre7);
     printf("Chiffre 7 = %s - %s = %s\n", tmp2, tmp1, tmp7);
 
     long long chiffre8_ll = -1234567890;
