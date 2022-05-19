@@ -589,7 +589,7 @@ int main() {
 
     unbounded_int chiffre5 = unbounded_int_produit(chiffre1, chiffre2);
     char *tmp5 = unbounded_int2string(chiffre5);
-    printf("%s\n", tmp5);*/
+    printf("%s\n", tmp5);
     printf("Chiffre 5 = %s * %s = %s\n", tmp1, tmp2, tmp5);
 
     unbounded_int chiffre6 = unbounded_int_somme(chiffre2, chiffre1);
