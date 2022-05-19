@@ -596,12 +596,8 @@ int main() {
     char *tmp6 = unbounded_int2string(chiffre6);
     printf("Chiffre 6 = %s + %s = %s\n", tmp2, tmp1, tmp6);
 
-    unbounded_int chiffre7 = unbounded_int_difference(chiffre2, chiffre1);
-    char *tmp7 = unbounded_int2string(chiffre7);
-    printf("%s\n", tmp7);
-
     long long chiffre_long_long = -10;
-    unbounded_int chiffre8 = ll2unbounded_int(chiffre_long_long);
+    unbounded_int chiffre7 = ll2unbounded_int(chiffre_long_long);
     printf("Chiffre 7 = %s - %s = %s\n", tmp2, tmp1, tmp7);
 
     long long chiffre8_ll = -1234567890;
