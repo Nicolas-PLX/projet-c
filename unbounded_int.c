@@ -159,7 +159,7 @@ char *unbounded_int2string(unbounded_int i) {
     if(i.signe == '-') {
         len++;
     }
-    char *e = malloc(sizeof(char) * len);
+    char *e = malloc(sizeof(char) * len + 1);
     if(e == NULL) {
         return NULL;
     }
@@ -172,6 +172,7 @@ char *unbounded_int2string(unbounded_int i) {
         c = c -> suivant;
         cpt++;
     }
+    e[len] = '\0';
     return e;
 }
 

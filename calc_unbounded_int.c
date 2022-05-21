@@ -389,6 +389,7 @@ void lecture(char **argv){
 
 
 int main(int argc, char **argv){
+<<<<<<< HEAD
     //int bool_i = option_i(argv);
     //int bool_o = option_o(argv);
     //lecture(argv);
@@ -405,6 +406,29 @@ int main(int argc, char **argv){
             printf("%s \n", tableau_sep[compteur]);
             compteur++;
             ligne_sep = strtok(NULL, separateurs);
+=======
+    int bool_i = option_i(argv);
+    int bool_o = option_o(argv);
+    char *buffer = (char *)malloc(LEN); //TODO : verifier s'il faut un tableau ou non
+    liste_variable *l_var = initialisation();
+
+    //Cas ou l'option i est utilise :
+    FILE *inputFile = stdin;
+    if (bool_i == 1){
+        int index_i = index_option_i(argv);
+        inputFile = fopen(argv[index_i],"r+");
+    }
+    if (inputFile == NULL){
+            printf("Ne peut pas ouvrir le fichier %s\n", argv[1]);
+            exit(EXIT_FAILURE);
+    }
+    //On lis le fichier
+    while (!feof(inputFile)){
+        fgets(buffer,LEN,inputFile);
+        if (ferror(inputFile)){
+            fprintf(stderr, "Erreur %d\n", errno);
+            break;
+>>>>>>> 562ebe48c20b40e1b3785d97acc16521a4c85966
         }
     printf("toui");
     return 0;
