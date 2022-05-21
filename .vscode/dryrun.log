@@ -1,0 +1,7 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/ellwia/projectc'
+gcc -Wall -g -pedantic   -c -o calc_unbounded_int.o calc_unbounded_int.c
+ 
+gcc -Wall -g -pedantic   -c -o unbounded_int.o unbounded_int.c
+make: Leaving directory `/Users/ellwia/projectc'
+ 

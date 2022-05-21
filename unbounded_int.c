@@ -159,7 +159,7 @@ char *unbounded_int2string(unbounded_int i) {
     if(i.signe == '-') {
         len++;
     }
-    char *e = malloc(sizeof(char) * len);
+    char *e = malloc(sizeof(char) * len + 1);
     if(e == NULL) {
         return NULL;
     }
@@ -172,6 +172,7 @@ char *unbounded_int2string(unbounded_int i) {
         c = c -> suivant;
         cpt++;
     }
+    e[len] = '\0';
     return e;
 }
 
@@ -567,7 +568,7 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
 }
 
 
-int main() {
+/*int main() {
 
     char chiffre_string1[] = "1234567890";
     unbounded_int chiffre1 = string2unbounded_int(chiffre_string1);
@@ -632,5 +633,5 @@ int main() {
     unbounded_int chiffre15 = unbounded_int_produit(chiffre14, chiffre13);
     char *tmp15 = unbounded_int2string(chiffre15);
     printf("Chiffre 15 = %s * %s = %s\n", tmp14, tmp13, tmp15);
-}
+}*/
 
