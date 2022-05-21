@@ -1,2 +1,2 @@
-ab2 = 5
+ab = 5
 print ab

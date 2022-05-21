@@ -63,7 +63,6 @@ static liste_variable *initialisation(){
 *  retourne la variable associe, sinon NULL
 */
 static variable *get_variable(liste_variable *liste, char *nom){
-    //printf("getvariable nom : %s\n", nom);
     if (liste == NULL || nom == NULL){
         exit(EXIT_FAILURE);
     }
@@ -71,10 +70,8 @@ static variable *get_variable(liste_variable *liste, char *nom){
     element *tmp = liste->premier;
     while (tmp != NULL){
         if (tmp->var == NULL){ 
-                //printf("get_variable_NULL\n");
             return NULL;
         }
-        printf("nom var_tmp : %s et nom : %s\n", tmp->var->nom,nom);
         if (strcmp(tmp->var->nom, nom) == 0){
             return tmp->var;
         }
@@ -90,13 +87,11 @@ static variable *get_variable(liste_variable *liste, char *nom){
 static int insertion(liste_variable *liste, variable *a){
     variable *verif = get_variable(liste,a->nom);
     if (verif != NULL){
-        printf("verif != NULL");
         free(verif);
         return 0;
     }
     element *nouveau = (element *)malloc(sizeof(element));
     if (liste == NULL || nouveau == NULL){
-        printf("insertion : NULL");
         exit(EXIT_FAILURE);
     }
     nouveau->var = a;
@@ -117,21 +112,22 @@ static void print_variable(liste_variable *liste){
 
 //Fonction boolean qui regarde si l'option i est présente dans les arguments du main.
 //Renvoie 1 si elle y est, sinon 0
-static int option_i(char **argv){
+static int option_i(int argc, char **argv){
     int i = 0;
-    char *nul = "\0";
     while(strcmp(argv[i],"\0") != 0){
         char *char_i = "-i";
         if (strcmp(argv[i], char_i) == 0){
             return 1;
         }
         i++;
+        if (argc == i){
+            return 0;
+        }
     }
-    return 0;
 }
 //Fonction boolean qui regarde si l'option o est presente dans les arguments du main.
 //Renvoie 1 si elle y est, sinon 0
-static int option_o(char **argv){
+static int option_o(int argc, char **argv){
     int i = 0;
     while(strcmp(argv[i],"\0") != 0){
         char *char_o = "-o";
@@ -139,9 +135,10 @@ static int option_o(char **argv){
             return 1;
         }
         i++;
+        if (argc == i){
+            return 0;
+        }
     }
-    printf("c'est censé etre ici \n");
-    return 0;
 }
 //Fonction qui verifie si la chaine de caractere en parametre est valable en tant que variable, c'est a dire que la chaine est remplis uniquement de charactere a-z
 //retourne 1 si la chaine est valide, 0 sinon.
@@ -179,7 +176,7 @@ static int nombre_valable(char *nombre){
 * Retourne 0 si le fichier n'est pas trouvé.
 */
 
-static int index_option_o(char **argv){
+static int index_option_o(int argc, char **argv){
     int i = 0;
     while(strcmp(argv[i],"\0") != 0){
         char *char_o = "-o";
@@ -188,8 +185,10 @@ static int index_option_o(char **argv){
             return i;
         }
         i++;
+        if (argc == i){
+            return 0;
+        }
     }
-    return 0;
 }
 
 /*Fonction qui retourne l'index du tableau de charactere ou se trouve le fichier de l'option i.
@@ -216,13 +215,13 @@ static int index_option_i(char **argv){
 static void calcul(variable *res, char *a, char *b, char *operation){
     unbounded_int int_a = string2unbounded_int(a);
     unbounded_int int_b = string2unbounded_int(b);
-    printf("\n");
-    printf("operation : %s\n", operation);
-    printf("nom resultat : %s\n", res->nom);
-    printf("valeur 1 : %s valeur 2 : %s\n",a,b);
+    //printf("\n");
+    //printf("operation : %s\n", operation);
+    //printf("nom resultat : %s\n", res->nom);
+    //printf("valeur 1 : %s valeur 2 : %s\n",a,b);
     if (strcmp(operation,"+") == 0){
         unbounded_int calc = unbounded_int_somme(int_a,int_b);
-        printf("valeur calcul : %s\n", unbounded_int2string(calc));
+        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
     if (strcmp(operation,"/") == 0){/*
@@ -231,12 +230,12 @@ static void calcul(variable *res, char *a, char *b, char *operation){
     }
     if (strcmp(operation,"-") == 0){
         unbounded_int calc = unbounded_int_difference(int_a,int_b);
-        printf("valeur calcul : %s\n", unbounded_int2string(calc));
+        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
     if (strcmp(operation,"*") == 0){
         unbounded_int calc = unbounded_int_produit(int_a,int_b);
-        printf("valeur calcul : %s\n", unbounded_int2string(calc));
+        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
 }
@@ -248,21 +247,16 @@ static void calcul(variable *res, char *a, char *b, char *operation){
 */
 
 static void print_var(char *nom, int boolean, char *file, liste_variable *liste){
-    printf("nom print_var : %s\n", nom);
     variable *var = get_variable(liste,nom);
     if (var == NULL){
-        printf("VAR == NULL je SAIS PAS PQ");
     }
-    printf("print_var var : %s\n",var->nom);
     char buffer[LEN];
     strcpy(buffer,nom); strcat(buffer," = ");
     if (var != NULL){
         char *tmp = unbounded_int2string(var->valeur);
         strcat(buffer,tmp);
-        printf("print buffer : %s\n", buffer);
         strcat(buffer,"\n");
     } else {
-        printf("var : %s", var);
         strcat(buffer,"0\n");
     }
     if (boolean == 1){
@@ -274,11 +268,9 @@ static void print_var(char *nom, int boolean, char *file, liste_variable *liste)
     }
 }
 //PHASE DE DEBOGUAGE
-void lecture(char **argv){
-    int bool_i = option_i(argv);
-    printf("%d\n", bool_i);
-    int bool_o = index_option_o(argv);
-    printf("%d\n", bool_o);
+void lecture(int argc, char **argv){
+    int bool_i = option_i(argc,argv);
+    int bool_o = option_o(argc,argv);
     char *buffer = (char *)malloc(LEN); //TODO : verifier s'il faut un tableau ou non
     liste_variable *l_var = initialisation();
 
@@ -312,9 +304,8 @@ void lecture(char **argv){
            
             //Enfin, on regarde cas par cas, des 3 instructions possible. on récupère d'abord le premier mot pour voir dans quel cas on se situe
             char *decoupage = tableau_sep[0];
-            printf("decoupage :%s \n", decoupage);
             if (strcmp(decoupage,"print") == 0){
-               int index_file = index_option_o(argv);
+               int index_file = index_option_o(argc,argv);
                print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
 
              } else {
@@ -325,11 +316,9 @@ void lecture(char **argv){
                        
                         variable *var = get_variable(l_var,tableau_sep[0]);
                         if (var != NULL){
-                            printf("var != NULL\n");
                             unbounded_int valeur = string2unbounded_int(tableau_sep[1]);
                             var->valeur = valeur;
                         } else {
-                            printf("var == NULL\n");
                             char *copy = malloc(sizeof(char) * strlen(tableau_sep[0]));
                             strcpy(copy,tableau_sep[0]);
                             variable *nv_var = new_var(copy,tableau_sep[1]);
@@ -338,11 +327,9 @@ void lecture(char **argv){
                         } 
                     } else if (strlen(tableau_sep[2]) == 1){ //Cas ou nous avons une operation
                     //On verifie que l'operation est valide.
-                    printf("%s\n", tableau_sep[0]);
 
                     if(tableau_sep[2][0] != '+' && tableau_sep[2][0] != '/' && tableau_sep[2][0] != '*' && tableau_sep[2][0] != '-'){
-                        printf("Calcul invalide 1");
-                        printf("%s", tableau_sep[2]);
+                        printf("Calcul invalide");
                         fclose(inputFile);
                         exit(EXIT_FAILURE);
                     }
@@ -356,30 +343,25 @@ void lecture(char **argv){
                     }
                     //On regarde ensuite le cas ou nous avons 2 variables (ex : " a * a")
                     if(arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
-                        printf("TU ES ICI 1\n");
                         variable *var_a = get_variable(l_var,tableau_sep[1]);
                         variable *var_b = get_variable(l_var,tableau_sep[3]);
                         calcul(var_res,unbounded_int2string(var_a->valeur),unbounded_int2string(var_b->valeur),tableau_sep[2]);
                     } else {
                         //On regarde ensuite le cas ou les deux sont des nombres (ex : "3 + 5")
                         if(nombre_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
-                            printf("TU ES ICI 2\n");
                             calcul(var_res,tableau_sep[1],tableau_sep[3],tableau_sep[2]);    
                         } else {
                         //On regarde ensuite le cas ou le premier argument est une variable, et le deuxieme un nombre (ex : "a * 3")
                             if(arg_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
-                                printf("TU ES ICI 3\n");
                                 variable *var_a = get_variable(l_var,tableau_sep[1]);
                                 calcul(var_res,unbounded_int2string(var_a->valeur),tableau_sep[3],tableau_sep[2]);
                             } else {
                                 //enfin, on regarde si le premier argument est un nombre et le deuxieme une variable (ex : "3 * a")
                                 if(nombre_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){ 
                                     variable *var_b = get_variable(l_var,tableau_sep[3]);
-                                    printf("TU ES ICI 4\n");
-                                    printf("valeur 1 : %s valeur 2 : %s\n", tableau_sep[1],unbounded_int2string(var_b->valeur));
                                     calcul(var_res,tableau_sep[1],unbounded_int2string(var_b->valeur),tableau_sep[2]);
                                 } else {
-                                    printf("Calcul invalide 2");
+                                    printf("Calcul invalide");
                                     fclose(inputFile);
                                     exit(EXIT_FAILURE);
                                 }
@@ -404,6 +386,5 @@ void lecture(char **argv){
 
 
 int main(int argc, char **argv){   
-    //printf("%s", argv[2]);
-   lecture(argv);
+   lecture(argc,argv);
 } 
