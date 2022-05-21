@@ -567,8 +567,8 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
     return *unbounded_int_creer();
 }
 
-
-/*int main() {
+/*
+int main() {
 
     char chiffre_string1[] = "1234567890";
     unbounded_int chiffre1 = string2unbounded_int(chiffre_string1);

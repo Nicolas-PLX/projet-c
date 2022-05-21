@@ -24,14 +24,30 @@ typedef struct liste_variable{
 }liste_variable;
 
 static variable *new_var(char *nom, char *valeur){
+<<<<<<< HEAD
     unbounded_int val = string2unbounded_int(valeur);
     printf("%s\n",valeur);
     if(val.signe != '*'){
+=======
+    char *s = malloc(sizeof(char) * strlen(valeur) + 1);
+    strcpy(s,valeur);
+    s[strlen(valeur)+1] = '\0';
+    unbounded_int val = string2unbounded_int(s);
+    printf("Langage de merde : %s\n", s);
+    char *tmp1 = unbounded_int2string(val);
+    printf("Langage de merde 2: %s\n", tmp1);
+    if(val.signe != '*') {
+>>>>>>> 46cb36ab46ac112c114fc7d9d3dac98cb302349c
         variable *var = malloc(sizeof(variable));    
         if (var == NULL){
             exit(EXIT_FAILURE);
         }
         var->nom = nom;
+        var->valeur = val;
+        char *chiffre_string1 = "1234567890";
+    unbounded_int chiffre1 = string2unbounded_int(chiffre_string1);
+    char *tmp1 = unbounded_int2string(chiffre1);
+    printf("Chiffre 1 = %s\n", tmp1);
         var->valeur = val;
         return var;
     } else {
@@ -60,6 +76,7 @@ static liste_variable *initialisation(){
 */
 
 static variable *get_variable(liste_variable *liste, char *nom){
+    //printf("getvariable nom : %s\n", nom);
     if (liste == NULL || nom == NULL){
         exit(EXIT_FAILURE);
     }
@@ -67,10 +84,10 @@ static variable *get_variable(liste_variable *liste, char *nom){
     element *tmp = liste->premier;
     while (tmp != NULL){
         if (tmp->var == NULL){ 
-                printf("tesst");
-                // TODO : verifier pourquoi ca ne renvoie pas NULL
+                //printf("get_variable_NULL\n");
             return NULL;
         }
+        printf("nom var_tmp : %s et nom : %s\n", tmp->var->nom,nom);
         if (strcmp(tmp->var->nom, nom) == 0){
             return tmp->var;
         }
@@ -86,11 +103,13 @@ static variable *get_variable(liste_variable *liste, char *nom){
 static int insertion(liste_variable *liste, variable *a){
     variable *verif = get_variable(liste,a->nom);
     if (verif != NULL){
+        printf("verif != NULL");
         free(verif);
         return 0;
     }
     element *nouveau = (element *)malloc(sizeof(element));
     if (liste == NULL || nouveau == NULL){
+        printf("insertion : NULL");
         exit(EXIT_FAILURE);
     }
     nouveau->var = a;
@@ -234,13 +253,21 @@ static void calcul(variable *res, char *a, char *b, char *operation){
 */
 
 static void print_var(char *nom, int boolean, char *file, liste_variable *liste){
+    printf("nom print_var : %s\n", nom);
     variable *var = get_variable(liste,nom);
+    if (var == NULL){
+        printf("VAR == NULL je SAIS PAS PQ");
+    }
+    printf("print_var var : %s\n",var->nom);
     char buffer[LEN];
     strcpy(buffer,nom); strcat(buffer," = ");
     if (var != NULL){
-        strcat(buffer,unbounded_int2string(var->valeur));
+        char *tmp = unbounded_int2string(var->valeur);
+        strcat(buffer,tmp);
+        printf("print buffer : %s\n", buffer);
         strcat(buffer,"\n");
     } else {
+        printf("var : %s", var);
         strcat(buffer,"0\n");
     }
     if (boolean == 1){
@@ -280,44 +307,44 @@ void lecture(char **argv){
             int compteur = 0; 
             char *tableau_sep[5]; // Taille 5 parce que pour nos instructions, aucune ne peut depasser 5.
             char *ligne_sep = strtok(buffer,separateurs);
-            while (ligne_sep != NULL){
+            while(ligne_sep != NULL){
                 tableau_sep[compteur] = ligne_sep;
                 compteur++;
                 ligne_sep = strtok(NULL, separateurs);
             }
-
-            //TEST
-            for(int i = 0; i < 4;i++){
-                //printf("%s ",tableau_sep[i]);
-            }
-
-            printf("\n");
+           
             //Enfin, on regarde cas par cas, des 3 instructions possible. on récupère d'abord le premier mot pour voir dans quel cas on se situe
             char *decoupage = tableau_sep[0];
+            printf("decoupage :%s \n", decoupage);
             if (strcmp(decoupage,"print") == 0){
                int index_file = index_option_o(argv);
                print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
 
              } else {
-                //printf("%s",decoupage);
+                //printf("%s ",decoupage);
                 if(arg_valable(decoupage) == 1){
-                    if(/*tableau_sep[2] == NULL*/ arg_valable(tableau_sep[2]) == 0 && nombre_valable(tableau_sep[2]) == 0){ //Cas ou on attribut seulement une valeur a une variable : en effet, si la 3eme case du tableau est vide, alors nous n'avons pas d'operateur, il reste donc que le cas ou nous devons attribuer une variable.
+                    //printf("%d\n", strlen(tableau_sep[2]));
+
+                    if(strlen(tableau_sep[2]) == 0 || strlen(tableau_sep[2]) > 1){ //Cas ou on attribut seulement une valeur a une variable : en effet, si la 3eme case du tableau est vide, alors nous n'avons pas d'operateur, il reste donc que le cas ou nous devons attribuer une variable.
                       //On regarde ensuite si la variable existe deja. Si c'est le cas, alors on change juste la valeur de la variable, sinon on l'initialise. 
                        
                         variable *var = get_variable(l_var,tableau_sep[0]);
-                        //print_variable(l_var);
                         if (var != NULL){
-                            printf("test\n");
+                            printf("var != NULL\n");
                             unbounded_int valeur = string2unbounded_int(tableau_sep[1]);
                             var->valeur = valeur;
                         } else {
-                            variable *nv_var = new_var(tableau_sep[0],tableau_sep[1]);
+                            printf("var == NULL\n");
+                            char *copy = malloc(sizeof(char) * strlen(tableau_sep[0]));
+                            strcpy(copy,tableau_sep[0]);
+                            variable *nv_var = new_var(copy,tableau_sep[1]);
                             insertion(l_var,nv_var);
+                            printf("l_var : %s\n", unbounded_int2string(l_var->premier->var->valeur));
                             free(var); //On libere l'espace pris pour l'ancienne var
-                        }
-                    } else { //Cas ou nous avons une operation
+                        } 
+                    } else if (strlen(tableau_sep[2]) == 1){ //Cas ou nous avons une operation
                     //On verifie que l'operation est valide.
-                    printf("%s\n", tableau_sep[1]);
+                    printf("%s\n", tableau_sep[0]);
 
                     if(tableau_sep[2] != "+" && tableau_sep[2] != "/" && tableau_sep[2] != "*" && tableau_sep[2] != "-"){
                         printf("Calcul invalide1");
@@ -327,7 +354,7 @@ void lecture(char **argv){
                     }
                     variable *var_res = get_variable(l_var,tableau_sep[0]);
                     //On regarde ensuite le cas ou nous avons 2 variables (ex : " a * a")
-                    if (arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
+                    if(arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
                         variable *var_a = get_variable(l_var,tableau_sep[1]);
                         variable *var_b = get_variable(l_var,tableau_sep[3]);
                         calcul(var_res,unbounded_int2string(var_a->valeur),unbounded_int2string(var_b->valeur),tableau_sep[2]);
@@ -371,31 +398,114 @@ void lecture(char **argv){
 
 
 int main(int argc, char **argv){
-    //int bool_i = option_i(argv);
-    //int bool_o = option_o(argv);
-    //lecture(argv);
+    int bool_i = option_i(argv);
+    int bool_o = option_o(argv);
+    char *buffer = (char *)malloc(LEN); //TODO : verifier s'il faut un tableau ou non
+    liste_variable *l_var = initialisation();
 
-    /*
-    const char * separateurs = " ";
-    char str[] = "";
-    char *tableau_sep[4];
-    int compteur = 0;
-    char *ligne_sep = strtok(str,separateurs);
-        while (ligne_sep != NULL){
-            //printf("%s\n", ligne_sep);
-            tableau_sep[compteur] = ligne_sep;
-            printf("%s \n", tableau_sep[compteur]);
-            compteur++;
-            ligne_sep = strtok(NULL, separateurs);
+    //Cas ou l'option i est utilise :
+    FILE *inputFile = stdin;
+    if (bool_i == 1){
+        int index_i = index_option_i(argv);
+        inputFile = fopen(argv[index_i],"r+");
+    }
+    if (inputFile == NULL){
+            printf("Ne peut pas ouvrir le fichier %s\n", argv[1]);
+            exit(EXIT_FAILURE);
+    }
+    //On lis le fichier
+    while (!feof(inputFile)){
+        fgets(buffer,LEN,inputFile);
+        if (ferror(inputFile)){
+            fprintf(stderr, "Erreur %d\n", errno);
+            break;
         }
-    printf("toui");
-    return 0;
-    
-   char *string = " ";
-   char a[] = "a";
-   char *egale = " = ";
-   char *valeur = "132";
-   strncat(string,a,10);
-   printf("%s\n",string);*/
-   lecture(argv);
-} 
+            //On separe la phrase en plusieurs segment pour l'analyser plus facilement, qu'on stockera dans un tableau de "string"
+            const char *separateurs = " =";
+            int compteur = 0; 
+            char *tableau_sep[5]; // Taille 5 parce que pour nos instructions, aucune ne peut depasser 5.
+            char *ligne_sep = strtok(buffer,separateurs);
+            while(ligne_sep != NULL){
+                tableau_sep[compteur] = ligne_sep;
+                compteur++;
+                ligne_sep = strtok(NULL, separateurs);
+            }
+           
+            //Enfin, on regarde cas par cas, des 3 instructions possible. on récupère d'abord le premier mot pour voir dans quel cas on se situe
+            char *decoupage = tableau_sep[0];
+            printf("decoupage :%s \n", decoupage);
+            if (strcmp(decoupage,"print") == 0){
+               int index_file = index_option_o(argv);
+               print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
+
+             } else {
+                //printf("%s ",decoupage);
+                if(arg_valable(decoupage) == 1){
+                    //printf("%d\n", strlen(tableau_sep[2]));
+
+                    if(strlen(tableau_sep[2]) == 0 || strlen(tableau_sep[2]) > 1){ //Cas ou on attribut seulement une valeur a une variable : en effet, si la 3eme case du tableau est vide, alors nous n'avons pas d'operateur, il reste donc que le cas ou nous devons attribuer une variable.
+                      //On regarde ensuite si la variable existe deja. Si c'est le cas, alors on change juste la valeur de la variable, sinon on l'initialise. 
+                       
+                        variable *var = get_variable(l_var,tableau_sep[0]);
+                        if (var != NULL){
+                            printf("var != NULL\n");
+                            unbounded_int valeur = string2unbounded_int(tableau_sep[1]);
+                            var->valeur = valeur;
+                        } else {
+                            printf("var == NULL\n");
+                            char *copy = malloc(sizeof(char) * strlen(tableau_sep[0]));
+                            strcpy(copy,tableau_sep[0]);
+                            variable *nv_var = new_var(copy,tableau_sep[1]);
+                            insertion(l_var,nv_var);
+                            printf("l_var : %s\n", unbounded_int2string(l_var->premier->var->valeur));
+                            free(var); //On libere l'espace pris pour l'ancienne var
+                        } 
+                    } else if (strlen(tableau_sep[2]) == 1){ //Cas ou nous avons une operation
+                    //On verifie que l'operation est valide.
+                    printf("%s\n", tableau_sep[0]);
+
+                    if(tableau_sep[2] != "+" && tableau_sep[2] != "/" && tableau_sep[2] != "*" && tableau_sep[2] != "-"){
+                        printf("Calcul invalide1");
+                        printf("%s", tableau_sep[2]);
+                        fclose(inputFile);
+                        exit(EXIT_FAILURE);
+                    }
+                    variable *var_res = get_variable(l_var,tableau_sep[0]);
+                    //On regarde ensuite le cas ou nous avons 2 variables (ex : " a * a")
+                    if(arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
+                        variable *var_a = get_variable(l_var,tableau_sep[1]);
+                        variable *var_b = get_variable(l_var,tableau_sep[3]);
+                        calcul(var_res,unbounded_int2string(var_a->valeur),unbounded_int2string(var_b->valeur),tableau_sep[2]);
+                    } else {
+                        //On regarde ensuite le cas ou les deux sont des nombres (ex : "3 + 5")
+                        if(nombre_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
+                            calcul(var_res,tableau_sep[1],tableau_sep[3],tableau_sep[2]);    
+                        } else {
+                        //On regarde ensuite le cas ou le premier argument est une variable, et le deuxieme un nombre (ex : "a * 3")
+                            if(arg_valable(tableau_sep[1]) == 1 && nombre_valable(tableau_sep[3]) == 1){
+                                variable *var_a = get_variable(l_var,tableau_sep[1]);
+                                calcul(var_res,unbounded_int2string(var_a->valeur),tableau_sep[3],tableau_sep[2]);
+                            } else {
+                                //enfin, on regarde si le premier argument est un nombre et le deuxieme une variable (ex : "3 * a")
+                                if(nombre_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
+                                    variable *var_b = get_variable(l_var,tableau_sep[3]);
+                                    calcul(var_res,tableau_sep[1],unbounded_int2string(var_b->valeur),tableau_sep[2]);
+                                } else {
+                                    printf("Calcul invalide 2");
+                                    fclose(inputFile);
+                                    exit(EXIT_FAILURE);
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                    printf("Variable non conforme");
+                    exit(EXIT_FAILURE);
+                }
+             }
+        }
+    fclose(inputFile);
+    free(buffer);
+    free(l_var);    
+}
