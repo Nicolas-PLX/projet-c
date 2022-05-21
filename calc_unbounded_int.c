@@ -24,11 +24,6 @@ typedef struct liste_variable{
 }liste_variable;
 
 static variable *new_var(char *nom, char *valeur){
-<<<<<<< HEAD
-    unbounded_int val = string2unbounded_int(valeur);
-    printf("%s\n",valeur);
-    if(val.signe != '*'){
-=======
     char *s = malloc(sizeof(char) * strlen(valeur) + 1);
     strcpy(s,valeur);
     s[strlen(valeur)+1] = '\0';
@@ -37,7 +32,6 @@ static variable *new_var(char *nom, char *valeur){
     char *tmp1 = unbounded_int2string(val);
     printf("Langage de merde 2: %s\n", tmp1);
     if(val.signe != '*') {
->>>>>>> 46cb36ab46ac112c114fc7d9d3dac98cb302349c
         variable *var = malloc(sizeof(variable));    
         if (var == NULL){
             exit(EXIT_FAILURE);
