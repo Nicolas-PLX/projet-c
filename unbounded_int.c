@@ -566,7 +566,7 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
     return *unbounded_int_creer();
 }
 
-
+/*
 int main() {
 
     char chiffre_string1[] = "1234567890";
@@ -632,5 +632,5 @@ int main() {
     unbounded_int chiffre15 = unbounded_int_produit(chiffre14, chiffre13);
     char *tmp15 = unbounded_int2string(chiffre15);
     printf("Chiffre 15 = %s * %s = %s\n", tmp14, tmp13, tmp15);
-}
+}*/
 
