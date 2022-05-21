@@ -23,6 +23,10 @@ typedef struct liste_variable{
     element *premier;
 }liste_variable;
 
+/*Fonction qui va creer une nouvelle variable.
+*@params nom pour le nom de la variable, valeur pour sa valeur.
+*retourne la nouvelle variable.
+*/
 static variable *new_var(char *nom, char *valeur){
     unbounded_int val = string2unbounded_int(valeur);
     if(val.signe != '*') {
@@ -37,7 +41,7 @@ static variable *new_var(char *nom, char *valeur){
         exit(EXIT_FAILURE);
     }
 }
-
+//Fonction qui initialise une nouvelle liste.
 static liste_variable *initialisation(){
     liste_variable *liste = (liste_variable*)malloc(sizeof(liste_variable));
     element *elem = (element*)malloc(sizeof(element));
@@ -57,7 +61,6 @@ static liste_variable *initialisation(){
 /* Fonction qui cherche la variable qui porte le nom "nom";
 *  retourne la variable associe, sinon NULL
 */
-
 static variable *get_variable(liste_variable *liste, char *nom){
     //printf("getvariable nom : %s\n", nom);
     if (liste == NULL || nom == NULL){
@@ -116,7 +119,7 @@ static void print_variable(liste_variable *liste){
 static int option_i(char **argv){
     int i = 0;
     char *nul = "\0";
-    while(strcmp(argv[i], nul) != 0){
+    while(strcmp(argv[i],"\0") != 0){
         char *char_i = "-i";
         if (strcmp(argv[i], char_i) == 0){
             return 1;
@@ -129,14 +132,14 @@ static int option_i(char **argv){
 //Renvoie 1 si elle y est, sinon 0
 static int option_o(char **argv){
     int i = 0;
-    char *nul = "\0";
-    while(strcmp(argv[i], nul) != 0){
+    while(strcmp(argv[i],"\0") != 0){
         char *char_o = "-o";
         if (strcmp(argv[i], char_o) == 0){
             return 1;
         }
         i++;
     }
+    printf("c'est censé etre ici \n");
     return 0;
 }
 //Fonction qui verifie si la chaine de caractere en parametre est valable en tant que variable, c'est a dire que la chaine est remplis uniquement de charactere a-z
@@ -272,7 +275,9 @@ static void print_var(char *nom, int boolean, char *file, liste_variable *liste)
 //PHASE DE DEBOGUAGE
 void lecture(char **argv){
     int bool_i = option_i(argv);
-    int bool_o = option_o(argv);
+    printf("%d\n", bool_i);
+    int bool_o = index_option_o(argv);
+    printf("%d\n", bool_o);
     char *buffer = (char *)malloc(LEN); //TODO : verifier s'il faut un tableau ou non
     liste_variable *l_var = initialisation();
 
@@ -341,6 +346,13 @@ void lecture(char **argv){
                         exit(EXIT_FAILURE);
                     }
                     variable *var_res = get_variable(l_var,tableau_sep[0]);
+                    if (var_res == NULL){
+                        char *copy = malloc(sizeof(char) * strlen(tableau_sep[0]));
+                            strcpy(copy,tableau_sep[0]);
+                            variable *nv_var = new_var(copy,"0");
+                            insertion(l_var,nv_var);
+                            var_res = nv_var;
+                    }
                     //On regarde ensuite le cas ou nous avons 2 variables (ex : " a * a")
                     if(arg_valable(tableau_sep[1]) == 1 && arg_valable(tableau_sep[3]) == 1){
                         printf("TU ES ICI 1\n");
@@ -390,34 +402,7 @@ void lecture(char **argv){
 
 
 
-int main(int argc, char **argv){
-    //int bool_i = option_i(argv);
-    //int bool_o = option_o(argv);
-    //lecture(argv);
-
-    /*
-    const char * separateurs = " ";
-    char str[] = "";
-    char *tableau_sep[4];
-    int compteur = 0;
-    char *ligne_sep = strtok(str,separateurs);
-        while (ligne_sep != NULL){
-            //printf("%s\n", ligne_sep);
-            tableau_sep[compteur] = ligne_sep;
-            printf("%s \n", tableau_sep[compteur]);
-            compteur++;
-            ligne_sep = strtok(NULL, separateurs);
-        }
-    printf("toui");
-    return 0;
-    
-   char *string = " ";
-   char a[] = "a";
-   char *egale = " = ";
-   char *valeur = "132";
-   strncat(string,a,10);
-   printf("%s\n",string);*/
+int main(int argc, char **argv){   
+    //printf("%s", argv[2]);
    lecture(argv);
-   //char * a = "a";
-   //printf("%d", arg_valable(a));
 } 
