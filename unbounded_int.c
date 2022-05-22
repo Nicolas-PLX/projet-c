@@ -607,6 +607,7 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
             reste = cpt % ll;
             char chiffre[SIZE_INT_IN_STRING];
             sprintf(chiffre, "%d", quotient);
+            unbounded_int_ajouter_char_fin(res, chiffre[0]);
             cpt = reste;
         } else if(cpt == 0) {
             if(!unbounded_int_is_empty(*res)) {
