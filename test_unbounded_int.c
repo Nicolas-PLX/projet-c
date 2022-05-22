@@ -4,7 +4,7 @@ int main() {
 
     char str1[] = "600",
          str2[] = "9000",
-         str3[] = "0",
+         str3[] = "9",
          str4[] = "31";
     long long ll1 = 73,
               ll2 = 93,
