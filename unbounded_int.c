@@ -7,7 +7,7 @@
 
 #define SIZE_INT_IN_STRING 3
 #define CONST_SOUSTRACTION 10
-#define UNKNOW_SIZE 256
+#define UNKNOW_SIZE 1024
 #define BIG_UNKNOW_SIZE 2048
 
 //Creer un chiffre en précisant s'il est suivi ou precede d'un autre chiffre
@@ -41,10 +41,11 @@ static int verification(const unbounded_int *i) {
 //Creer un unbounded_int valant 0
 static unbounded_int *unbounded_int_creer_zero() {
     unbounded_int *tmp = malloc(sizeof(unbounded_int));
-    tmp -> signe = '+';
     if(tmp == NULL) {
         tmp -> signe = '*';
+        return tmp;
     }
+    tmp -> signe = '+';
     tmp -> len = 1;
     tmp -> premier = chiffre_creer_char('0');
     tmp -> dernier = tmp -> premier;
@@ -139,10 +140,12 @@ unbounded_int string2unbounded_int(const char *e) {
     unbounded_int *tmp = unbounded_int_creer();
     int cpt = 0;
     while(e[cpt] != '\0') {
-        tmp = unbounded_int_ajouter_char_fin(tmp, e[cpt]);
+        if(isdigit(e[cpt])) {
+            tmp = unbounded_int_ajouter_char_fin(tmp, e[cpt]);
+        }
         cpt++;
     }
-    if(atoi(e) < 0) {
+    if(e[0] == '-') {
         tmp -> signe = '-';
     } else {
         tmp -> signe = '+';
@@ -508,11 +511,10 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
 //Calculer le produit de deux unbounded_int a et b
 unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     unbounded_int *tmp = unbounded_int_creer(),
-                  *res = unbounded_int_creer();
+                  *somme = unbounded_int_creer_zero();
     int retenu = 0,
         cpt = 0,
         produit;
-    long long somme = 0;
     chiffre *j = b.dernier;
     while(j != NULL) {
         chiffre *i = a.dernier;
@@ -541,24 +543,22 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
             unbounded_int_ajouter_char_debut(tmp, chiffre[0]);
             retenu = 0;
         }
-        long long produit_in_long_long = unbounded_int2ll(*tmp);
         for(int i = 0; i < cpt; i++) {
-            produit_in_long_long *= 10;
+            unbounded_int_ajouter_char_fin(tmp, '0');
         }
         //Addition du produit
-        somme += produit_in_long_long;
+        *somme = unbounded_int_somme(*somme, *tmp);
         tmp = unbounded_int_creer();
         cpt++;
         j = j -> precedent;
     }
     //Mis en place du signe du resultat
-    *res = ll2unbounded_int(somme);
     if((a.signe == '+' && b.signe == '+') || (a.signe == '-' && b.signe == '-')) {
-        res -> signe = '+';
+        somme -> signe = '+';
     } else {
-        res -> signe = '-';
+        somme -> signe = '-';
     }
-    return *res;
+    return *somme;
 }
 
 //Calculer le quotient de la division entiere d'un unbounded_int a par un unbounded_int b
@@ -595,19 +595,6 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
             cpt = reste;
         }
         i = i -> suivant;
-    }
-    if(a.signe == '+') {
-        if(b.signe == '+') {
-            res -> signe = '+';
-        } else {
-            res -> signe = '-';
-        }
-    } else {
-        if(b.signe == '+') {
-            res -> signe = '-';
-        } else {
-            res -> signe = '+';
-        }
     }
     return *res;
 }

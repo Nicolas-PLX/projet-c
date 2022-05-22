@@ -2,14 +2,14 @@
 
 int main() {
 
-    char str1[] = "600",
-         str2[] = "9000",
-         str3[] = "9",
-         str4[] = "31";
+    char str1[] = "1500000000000000",
+         str2[] = "-1500000000000000",
+         str3[] = "908",
+         str4[] = "-908";
     long long ll1 = 73,
-              ll2 = 93,
-              ll3 = 2,
-              ll4 = 8;
+              ll2 = -1,
+              ll3 = -2,
+              ll4 = 0;
     
     unbounded_int chiffre1 = string2unbounded_int(str1),
                   chiffre2 = string2unbounded_int(str2),
@@ -39,9 +39,10 @@ int main() {
     printf("Chiffre 8 = %s\n", tmp8);
 
     printf("\n");
-
+     
     /***************************************************** SOMME *****************************************************/
     
+    /*
     unbounded_int somme1 = unbounded_int_somme(chiffre1, chiffre1),
                   somme2 = unbounded_int_somme(chiffre1, chiffre2),
                   somme3 = unbounded_int_somme(chiffre1, chiffre3),
@@ -238,8 +239,11 @@ int main() {
     printf("Somme 64 : %s + %s = %s\n", tmp8, tmp8, tmp_somme64);
 
     printf("\n");
+     
+     */
 
     /***************************************************** DIFFERENCE *****************************************************/
+    
     
     unbounded_int difference1 = unbounded_int_difference(chiffre1, chiffre1),
                   difference2 = unbounded_int_difference(chiffre1, chiffre2),
@@ -438,7 +442,11 @@ int main() {
 
     printf("\n");
 
+    
+
     /***************************************************** PRODUIT *****************************************************/
+
+     /*
 
     unbounded_int produit1 = unbounded_int_produit(chiffre1, chiffre1),
                   produit2 = unbounded_int_produit(chiffre1, chiffre2),
@@ -637,7 +645,11 @@ int main() {
 
     printf("\n");
 
+    */
+
     /***************************************************** QUOTIENT *****************************************************/
+
+     /*
 
     unbounded_int quotient1 = unbounded_int_quotient(chiffre1, chiffre1),
                   quotient2 = unbounded_int_quotient(chiffre1, chiffre2),
@@ -836,7 +848,11 @@ int main() {
 
     printf("\n");
 
+     */
+
     /***************************************************** MODULO *****************************************************/
+
+     /*
 
     unbounded_int modulo1 = unbounded_int_modulo(chiffre1, chiffre1),
                   modulo2 = unbounded_int_modulo(chiffre1, chiffre2),
@@ -1032,5 +1048,10 @@ int main() {
     printf("Modulo 62 : %s = %s  [ %s ]\n", tmp8, tmp_modulo62, tmp6);
     printf("Modulo 63 : %s = %s  [ %s ]\n", tmp8, tmp_modulo63, tmp7);
     printf("Modulo 64 : %s = %s  [ %s ]\n", tmp8, tmp_modulo64, tmp8);
+
+     */
+
+
+
 
 }

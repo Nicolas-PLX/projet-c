@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Sun May 22 18:03:36 2022
+# Make data base, printed on Sun May 22 20:06:06 2022
 
 # Variables
 
@@ -17,6 +17,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # environment
+ 
 VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
@@ -101,7 +102,7 @@ USER = ellwia
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 5)
-ALL = calc_unbounded_int test_unbounded_int
+ALL = calc_unbounded_int test_unbounded
 # environment
 LESS = -R
 # automatic
@@ -165,9 +166,9 @@ VSCODE_PID = 454
 
 # Directories
 
-# . (device 16777221, inode 59118134): 12 files, no impossibilities.
+# . (device 16777221, inode 59118134): 17 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 17 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -178,13 +179,13 @@ VSCODE_PID = 454
 # Not a target:
 calc_unbounded_int.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 12:52:32
+#  Last modified 2022-05-22 18:12:41
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-all: calc_unbounded_int test_unbounded_int
+all: calc_unbounded_int test_unbounded
 #  Command-line target.
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -196,16 +197,7 @@ all: calc_unbounded_int test_unbounded_int
 # Not a target:
 unbounded_int.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 11:32:16
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-test_unbounded_int.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-22 13:31:21
+#  Last modified 2022-05-22 18:10:44
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -220,7 +212,7 @@ test_unbounded_int.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 13:16:50
+#  Last modified 2022-05-22 20:04:48
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -232,9 +224,25 @@ Makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
+test_unbounded: test_unbounded.o unbounded_int.o
+#  Implicit rule search has been done.
+#  Last modified 2022-05-22 20:04:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+test_unbounded.o: test_unbounded.c unbounded_int.h
+#  Implicit rule search has been done.
+#  Last modified 2022-05-22 20:04:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 unbounded_int.o: unbounded_int.c unbounded_int.h
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-05-22 20:04:52
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -242,7 +250,7 @@ unbounded_int.o: unbounded_int.c unbounded_int.h
 
 calc_unbounded_int.o: calc_unbounded_int.c unbounded_int.h
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-05-22 20:04:52
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -250,7 +258,7 @@ calc_unbounded_int.o: calc_unbounded_int.c unbounded_int.h
 
 calc_unbounded_int: calc_unbounded_int.o unbounded_int.o
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-05-22 20:04:52
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -264,22 +272,6 @@ clean:
 	rm -rf *~ *.o
 	
 
-test_unbounded_int.o: test_unbounded_int.c unbounded_int.h
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-test_unbounded_int: test_unbounded_int.o unbounded_int.o
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 cleanall:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -289,9 +281,18 @@ cleanall:
 	
 
 # Not a target:
+test_unbounded.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-22 19:18:24
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
 unbounded_int.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 13:38:37
+#  Last modified 2022-05-22 19:58:51
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -301,6 +302,7 @@ unbounded_int.c:
 # Load=15/1024=1%, Rehash=0, Collisions=0/40=0%
 # VPATH Search Paths
 
+ 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
@@ -308,9 +310,8 @@ unbounded_int.c:
 # # of strings in strcache: 1
 # # of strcache buffers: 1
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
- 
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun May 22 18:03:36 2022
+# Finished Make data base on Sun May 22 20:06:06 2022
 
  
