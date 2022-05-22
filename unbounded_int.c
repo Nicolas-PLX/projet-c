@@ -419,11 +419,7 @@ static unbounded_int unbounded_int_difference_simple(unbounded_int a, unbounded_
         //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
-        if(retenu == 0) {
-            unbounded_int_ajouter_char_debut(res, chiffre[0]);
-        } else {
-            unbounded_int_ajouter_char_debut(res, chiffre[1]);
-        }
+        unbounded_int_ajouter_char_debut(res, chiffre[0]);
     } 
     //Cas ou a est plus long que b
     while(i != NULL) {
@@ -439,11 +435,7 @@ static unbounded_int unbounded_int_difference_simple(unbounded_int a, unbounded_
         //Ajout du resultat
         char chiffre[SIZE_INT_IN_STRING];
         sprintf(chiffre, "%d", difference);
-        if(retenu == 0) {
-            unbounded_int_ajouter_char_debut(res, chiffre[0]);
-        } else {
-            unbounded_int_ajouter_char_debut(res, chiffre[1]);
-        }
+        unbounded_int_ajouter_char_debut(res, chiffre[0]);
         i = i -> precedent;
     }
     return *res;
@@ -668,9 +660,9 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
 
 int main() {
 
-    char string1[] = "999",
+    char string1[] = "400",
          string2[] = "1",
-         string3[] = "-999",
+         string3[] = "-400",
          string4[] = "-1";
     unbounded_int chiffre1 = string2unbounded_int(string1),
                   chiffre2 = string2unbounded_int(string2),
