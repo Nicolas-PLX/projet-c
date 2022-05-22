@@ -503,21 +503,14 @@ unbounded_int unbounded_int_difference(unbounded_int a, unbounded_int b) {
     return res;
 }
 
-//Calculer 10 a un certaine puissance n
-static int dix_puissance(int acc, int n) {
-    if(n == 0) {
-        return acc;
-    }
-    return dix_puissance(acc * 10, n - 1);
-}
-
 //Calculer le produit de deux unbounded_int a et b
 unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
     unbounded_int *tmp = unbounded_int_creer(),
-                  *somme = unbounded_int_creer_zero();
+                  *res = unbounded_int_creer();
     int retenu = 0,
         cpt = 0,
         produit;
+    long long somme = 0;
     chiffre *j = b.dernier;
     while(j != NULL) {
         chiffre *i = a.dernier;
@@ -547,24 +540,23 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
             retenu = 0;
         }
         long long produit_in_long_long = unbounded_int2ll(*tmp);
-        //Ajout du decalage
-        if(cpt > 0) {
-            produit_in_long_long *= dix_puissance(1, cpt);
+        for(int i = 0; i < cpt; i++) {
+            produit_in_long_long *= 10;
         }
         //Addition du produit
-        unbounded_int produit_in_unbounded_int = ll2unbounded_int(produit_in_long_long);
-        *somme = unbounded_int_somme(*somme, produit_in_unbounded_int);
+        somme += produit_in_long_long;
         tmp = unbounded_int_creer();
         cpt++;
         j = j -> precedent;
     }
     //Mis en place du signe du resultat
+    *res = ll2unbounded_int(somme);
     if((a.signe == '+' && b.signe == '+') || (a.signe == '-' && b.signe == '-')) {
-        somme -> signe = '+';
+        res -> signe = '+';
     } else {
-        somme -> signe = '-';
+        res -> signe = '-';
     }
-    return *somme;
+    return *res;
 }
 
 //Calculer le quotient de la division entiere d'un unbounded_int a par un unbounded_int b
@@ -574,21 +566,17 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
     }
     unbounded_int *res = unbounded_int_creer();
     long long cpt = 0,
-              ll = unbounded_int2ll(b);
+              ll = unbounded_int2ll(b),
+              reste;
     int decalage = 1,
-        quotient,
-        reste;
+        quotient;
     chiffre *i = a.premier;
     if(b.signe == '-') {
         ll *= -1;
     }
     while(i != NULL) {
         int int_i = i -> c - '0';
-        if(cpt) {
-            cpt = (cpt * decalage) + int_i;
-        } else {
-            cpt += int_i;
-        }
+        cpt = (cpt * decalage) + int_i;
         if(decalage == 1) {
             decalage = 10;
         }
@@ -599,7 +587,6 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
             sprintf(chiffre, "%d", quotient);
             unbounded_int_ajouter_char_fin(res, chiffre[0]);
             cpt = reste;
-            decalage = 1;
         }
         i = i -> suivant;
     }
@@ -623,12 +610,14 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
 unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
     if(unbounded_int_cmp_unbounted_int_absolute_value(a, b) == -1) {
         char *tmp = unbounded_int2string(a);
-        return string2unbounded_int(tmp);
+        unbounded_int res = string2unbounded_int(tmp);
+        res.signe = '+';
+        return res;
     }
     long long cpt = 0,
-              ll = unbounded_int2ll(b);
-    int decalage = 1,
-        reste;
+              ll = unbounded_int2ll(b),
+              reste;
+    int decalage = 1;
     chiffre *i = a.premier;
     if(b.signe == '-') {
         ll *= -1;
@@ -650,8 +639,11 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
         }
         i = i -> suivant;
     }
+    if(reste < 0) {
+        reste *= -1;
+    }
     char nombre[BIG_UNKNOW_SIZE];
-    sprintf(nombre, "%d", reste);
+    sprintf(nombre, "%lld", reste);
     unbounded_int res = string2unbounded_int(nombre);
     res.signe = '+';
     return res;
@@ -660,23 +652,31 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
 
 int main() {
 
-    char string1[] = "400",
-         string2[] = "1",
-         string3[] = "-400",
-         string4[] = "-1";
+    char string1[] = "98987676565",
+         string2[] = "3",
+         string3[] = "-98987676565",
+         string4[] = "-3";
+    long long ll1 = 3,
+              ll2 = -3;
     unbounded_int chiffre1 = string2unbounded_int(string1),
                   chiffre2 = string2unbounded_int(string2),
                   chiffre3 = string2unbounded_int(string3),
-                  chiffre4 = string2unbounded_int(string4);
+                  chiffre4 = string2unbounded_int(string4),
+                  chiffre5 = ll2unbounded_int(ll1),
+                  chiffre6 = ll2unbounded_int(ll2);
     char *tmp1 = unbounded_int2string(chiffre1),
          *tmp2 = unbounded_int2string(chiffre2),
          *tmp3 = unbounded_int2string(chiffre3),
-         *tmp4 = unbounded_int2string(chiffre4);
+         *tmp4 = unbounded_int2string(chiffre4),
+         *tmp5 = unbounded_int2string(chiffre5),
+         *tmp6 = unbounded_int2string(chiffre6);
 
     printf("Chiffre 1 = %s\n", tmp1);
     printf("Chiffre 2 = %s\n", tmp2);
     printf("Chiffre 3 = %s\n", tmp3);
     printf("Chiffre 4 = %s\n", tmp4);
+    printf("Chiffre 5 : %s\n", tmp5);
+    printf("Chiffre 6 : %s\n", tmp6);
 
     printf("\n");
     
@@ -834,17 +834,6 @@ int main() {
     printf("Produit 15 : %s * %s = %s\n", tmp4, tmp3, tmp_produit15);
     printf("Produit 16 : %s * %s = %s\n", tmp4, tmp4, tmp_produit16);    
 
-    printf("\n"); 
-
-    long long ll1 = 3,
-              ll2 = -3;
-    unbounded_int chiffre5 = ll2unbounded_int(ll1),
-                  chiffre6 = ll2unbounded_int(ll2);
-    char *tmp5 = unbounded_int2string(chiffre5),
-         *tmp6 = unbounded_int2string(chiffre6);
-
-    printf("Chiffre 5 : %s\n", tmp5);
-    printf("Chiffre 6 : %s\n", tmp6);
     printf("\n");
 
     unbounded_int quotient1 = unbounded_int_quotient(chiffre5, chiffre5),
@@ -950,6 +939,11 @@ int main() {
     printf("Modulo 16 : %s mod %s = %s\n", tmp4, tmp4, tmp_modulo16); 
 
     printf("\n");
+
+    /*unbounded_int produit = unbounded_int_produit(chiffre2, chiffre1);
+    char *tmp_produit = unbounded_int2string(produit);
+    printf("Produit : %s * %s = %s\n", tmp2, tmp1, tmp_produit);*/
+
 
 }
 
