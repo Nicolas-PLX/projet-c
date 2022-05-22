@@ -438,6 +438,8 @@ static unbounded_int unbounded_int_difference_simple(unbounded_int a, unbounded_
         unbounded_int_ajouter_char_debut(res, chiffre[0]);
         i = i -> precedent;
     }
+    long long tmp = unbounded_int2ll(*res);
+    *res = ll2unbounded_int(tmp);
     return *res;
 }
 
@@ -650,12 +652,12 @@ unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
 }
 
 
-int main() {
+/*int main() {
 
-    char string1[] = "98987676565",
-         string2[] = "3",
-         string3[] = "-98987676565",
-         string4[] = "-3";
+    char string1[] = "300",
+         string2[] = "301",
+         string3[] = "-300",
+         string4[] = "-301";
     long long ll1 = 3,
               ll2 = -3;
     unbounded_int chiffre1 = string2unbounded_int(string1),
@@ -940,10 +942,10 @@ int main() {
 
     printf("\n");
 
-    /*unbounded_int produit = unbounded_int_produit(chiffre2, chiffre1);
-    char *tmp_produit = unbounded_int2string(produit);
-    printf("Produit : %s * %s = %s\n", tmp2, tmp1, tmp_produit);*/
+    /*unbounded_int op = unbounded_int_difference(chiffre1, chiffre2);
+    char *tmp = unbounded_int2string(op);
+    printf("Diff : %s - %s = %s\n", tmp2, tmp1, tmp);*/
 
 
-}
+}*/
 
