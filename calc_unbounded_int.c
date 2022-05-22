@@ -124,6 +124,7 @@ static int option_i(int argc, char **argv){
             return 0;
         }
     }
+    return 0;
 }
 //Fonction boolean qui regarde si l'option o est presente dans les arguments du main.
 //Renvoie 1 si elle y est, sinon 0
@@ -139,11 +140,11 @@ static int option_o(int argc, char **argv){
             return 0;
         }
     }
+    return 0;
 }
 //Fonction qui verifie si la chaine de caractere en parametre est valable en tant que variable, c'est a dire que la chaine est remplis uniquement de charactere a-z
 //retourne 1 si la chaine est valide, 0 sinon.
 static int arg_valable(char *mot){
-    int n = strlen(mot);
     int val_ascii = 0;
      for(int i =0; mot[i] != '\0';++i){
         val_ascii = (int)mot[i];
@@ -157,16 +158,15 @@ static int arg_valable(char *mot){
 //Fonction qui verifie que la chaine est bien un nombre, en verifiant les characteres ASCII
 //pour nous, un nombre peut aussi avoir "+" et "-" au debut de son nom, pour le signe du nombre.
 static int nombre_valable(char *nombre){
-    int n = strlen(nombre);
     int val_ascii = 0;
     for(int i =0; nombre[i] != '\0';++i){
         val_ascii = (int)nombre[i];
         if(val_ascii < 48 || val_ascii > 57){ //Valeur ASCII de 0 et de 9
-        if (i == 0){
-            if (val_ascii != 43 && val_ascii != 45){ //valeur ASCII du + et -
-                return 0;
+            if (i == 0){
+                if (val_ascii != 43 && val_ascii != 45){ //valeur ASCII du + et -
+                    return 0;
+                }
             }
-        }
         }
     }
     return 1;
@@ -189,6 +189,7 @@ static int index_option_o(int argc, char **argv){
             return 0;
         }
     }
+    return 0;
 }
 
 /*Fonction qui retourne l'index du tableau de charactere ou se trouve le fichier de l'option i.
@@ -215,27 +216,20 @@ static int index_option_i(char **argv){
 static void calcul(variable *res, char *a, char *b, char *operation){
     unbounded_int int_a = string2unbounded_int(a);
     unbounded_int int_b = string2unbounded_int(b);
-    //printf("\n");
-    //printf("operation : %s\n", operation);
-    //printf("nom resultat : %s\n", res->nom);
-    //printf("valeur 1 : %s valeur 2 : %s\n",a,b);
     if (strcmp(operation,"+") == 0){
         unbounded_int calc = unbounded_int_somme(int_a,int_b);
-        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
-    if (strcmp(operation,"/") == 0){/*
+    if (strcmp(operation,"/") == 0){
         unbounded_int calc = unbounded_int_quotient(int_a,int_b);
-        res-> valeur = calc;*/
+        res-> valeur = calc;
     }
     if (strcmp(operation,"-") == 0){
         unbounded_int calc = unbounded_int_difference(int_a,int_b);
-        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
     if (strcmp(operation,"*") == 0){
         unbounded_int calc = unbounded_int_produit(int_a,int_b);
-        //printf("valeur calcul : %s\n", unbounded_int2string(calc));
         res-> valeur = calc;
     }
 }
@@ -271,7 +265,7 @@ static void print_var(char *nom, int boolean, char *file, liste_variable *liste)
 void lecture(int argc, char **argv){
     int bool_i = option_i(argc,argv);
     int bool_o = option_o(argc,argv);
-    char *buffer = (char *)malloc(LEN); //TODO : verifier s'il faut un tableau ou non
+    char *buffer = (char *)malloc(LEN);
     liste_variable *l_var = initialisation();
 
     //Cas ou l'option i est utilise :
@@ -309,7 +303,6 @@ void lecture(int argc, char **argv){
                print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
 
              } else {
-                //printf("%s ",decoupage);
                 if(arg_valable(decoupage) == 1){
                     if(strlen(tableau_sep[2]) == 0 || strlen(tableau_sep[2]) > 1){ //Cas ou on attribut seulement une valeur a une variable : en effet, si la 3eme case du tableau est vide, alors nous n'avons pas d'operateur, il reste donc que le cas ou nous devons attribuer une variable.
                       //On regarde ensuite si la variable existe deja. Si c'est le cas, alors on change juste la valeur de la variable, sinon on l'initialise. 
