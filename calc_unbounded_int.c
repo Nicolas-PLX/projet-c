@@ -266,7 +266,7 @@ void lecture(int argc, char **argv){
         inputFile = fopen(argv[index_i],"r+");
     }
     if (inputFile == NULL){
-            printf("Ne peut pas ouvrir le fichier %s\n", argv[1]);
+            printf("Ne peut pas ouvrir le fichier\n");
             exit(EXIT_FAILURE);
     }
     //On lis le fichier
@@ -291,8 +291,12 @@ void lecture(int argc, char **argv){
             char *decoupage = tableau_sep[0];
             if (strcmp(decoupage,"print") == 0){
                int index_file = index_option_o(argc,argv);
-               print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
-
+               if(strlen(tableau_sep[1]) == 0){
+                   printf("Il n'y a rien a afficher.\n");
+                   exit(EXIT_FAILURE);
+               } else {
+                    print_var(tableau_sep[1],bool_o,argv[index_file],l_var);
+               }
              } else {
                 if(arg_valable(decoupage) == 1){
                     if(strlen(tableau_sep[2]) == 0 || strlen(tableau_sep[2]) > 1){ //Cas ou on attribut seulement une valeur a une variable : en effet, si la 3eme case du tableau est vide, alors nous n'avons pas d'operateur, il reste donc que le cas ou nous devons attribuer une variable.
