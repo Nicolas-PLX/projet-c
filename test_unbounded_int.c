@@ -3,13 +3,13 @@
 int main() {
 
     char str1[] = "600",
-         str2[] = "-600",
+         str2[] = "9000",
          str3[] = "1",
-         str4[] = "-1";
+         str4[] = "31";
     long long ll1 = 73,
-              ll2 = -73,
-              ll3 = 0,
-              ll4 = -0;
+              ll2 = 93,
+              ll3 = 2,
+              ll4 = 8;
     
     unbounded_int chiffre1 = string2unbounded_int(str1),
                   chiffre2 = string2unbounded_int(str2),
