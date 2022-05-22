@@ -1,7 +1,16 @@
-#include "unbounded_int.h";
+#include "unbounded_int.h"
 
-static void somme(char *str1, char *str2, char *str3, char *str4, long long ll1, long long ll2, long long ll3, long long ll4) {
+int main() {
 
+    char str1[] = "600",
+         str2[] = "-600",
+         str3[] = "1",
+         str4[] = "-1";
+    long long ll1 = 73,
+              ll2 = -73,
+              ll3 = 0,
+              ll4 = -0;
+    
     unbounded_int chiffre1 = string2unbounded_int(str1),
                   chiffre2 = string2unbounded_int(str2),
                   chiffre3 = string2unbounded_int(str3),
@@ -31,6 +40,8 @@ static void somme(char *str1, char *str2, char *str3, char *str4, long long ll1,
 
     printf("\n");
 
+    /***************************************************** SOMME *****************************************************/
+    
     unbounded_int somme1 = unbounded_int_somme(chiffre1, chiffre1),
                   somme2 = unbounded_int_somme(chiffre1, chiffre2),
                   somme3 = unbounded_int_somme(chiffre1, chiffre3),
@@ -161,105 +172,75 @@ static void somme(char *str1, char *str2, char *str3, char *str4, long long ll1,
          *tmp_somme63 = unbounded_int2string(somme63),
          *tmp_somme64 = unbounded_int2string(somme64);
 
-    printf("Somme 1 : %s + %s = %s\n", tmp1, tmp1, somme1);
-    printf("Somme 2 : %s + %s = %s\n", tmp1, tmp2, somme2);
-    printf("Somme 3 : %s + %s = %s\n", tmp1, tmp3, somme3);
-    printf("Somme 4 : %s + %s = %s\n", tmp1, tmp4, somme4);
-    printf("Somme 5 : %s + %s = %s\n", tmp1, tmp5, somme5);
-    printf("Somme 6 : %s + %s = %s\n", tmp1, tmp6, somme6);
-    printf("Somme 7 : %s + %s = %s\n", tmp1, tmp7, somme7);
-    printf("Somme 8 : %s + %s = %s\n", tmp1, tmp8, somme8);
-    printf("Somme 9 : %s + %s = %s\n", tmp2, tmp1, somme9);
-    printf("Somme 10 : %s + %s = %s\n", tmp2, tmp2, somme10);
-    printf("Somme 11 : %s + %s = %s\n", tmp2, tmp3, somme11);
-    printf("Somme 12 : %s + %s = %s\n", tmp2, tmp4, somme12);
-    printf("Somme 13 : %s + %s = %s\n", tmp2, tmp5, somme13);
-    printf("Somme 14 : %s + %s = %s\n", tmp2, tmp6, somme14);
-    printf("Somme 15 : %s + %s = %s\n", tmp2, tmp7, somme15);
-    printf("Somme 16 : %s + %s = %s\n", tmp2, tmp8, somme16);
-    printf("Somme 17 : %s + %s = %s\n", tmp3, tmp1, somme17);
-    printf("Somme 18 : %s + %s = %s\n", tmp3, tmp2, somme18);
-    printf("Somme 19 : %s + %s = %s\n", tmp3, tmp3, somme19);
-    printf("Somme 20 : %s + %s = %s\n", tmp3, tmp4, somme20);
-    printf("Somme 21 : %s + %s = %s\n", tmp3, tmp5, somme21);
-    printf("Somme 22 : %s + %s = %s\n", tmp3, tmp6, somme22);
-    printf("Somme 23 : %s + %s = %s\n", tmp3, tmp7, somme23);
-    printf("Somme 24 : %s + %s = %s\n", tmp3, tmp8, somme24);
-    printf("Somme 25 : %s + %s = %s\n", tmp4, tmp1, somme25);
-    printf("Somme 26 : %s + %s = %s\n", tmp4, tmp2, somme26);
-    printf("Somme 27 : %s + %s = %s\n", tmp4, tmp3, somme27);
-    printf("Somme 28 : %s + %s = %s\n", tmp4, tmp4, somme28);
-    printf("Somme 29 : %s + %s = %s\n", tmp4, tmp5, somme29);
-    printf("Somme 30 : %s + %s = %s\n", tmp4, tmp6, somme30);
-    printf("Somme 31 : %s + %s = %s\n", tmp4, tmp7, somme31);
-    printf("Somme 32 : %s + %s = %s\n", tmp4, tmp8, somme32);
-    printf("Somme 33 : %s + %s = %s\n", tmp5, tmp1, somme33);
-    printf("Somme 34 : %s + %s = %s\n", tmp5, tmp2, somme34);
-    printf("Somme 35 : %s + %s = %s\n", tmp5, tmp3, somme35);
-    printf("Somme 36 : %s + %s = %s\n", tmp5, tmp4, somme36);
-    printf("Somme 37 : %s + %s = %s\n", tmp5, tmp5, somme37);
-    printf("Somme 38 : %s + %s = %s\n", tmp5, tmp6, somme38);
-    printf("Somme 39 : %s + %s = %s\n", tmp5, tmp7, somme39);
-    printf("Somme 40 : %s + %s = %s\n", tmp5, tmp8, somme40);
-    printf("Somme 41 : %s + %s = %s\n", tmp6, tmp1, somme41);
-    printf("Somme 42 : %s + %s = %s\n", tmp6, tmp2, somme42);
-    printf("Somme 43 : %s + %s = %s\n", tmp6, tmp3, somme43);
-    printf("Somme 44 : %s + %s = %s\n", tmp6, tmp4, somme44);
-    printf("Somme 45 : %s + %s = %s\n", tmp6, tmp5, somme45);
-    printf("Somme 46 : %s + %s = %s\n", tmp6, tmp6, somme46);
-    printf("Somme 47 : %s + %s = %s\n", tmp6, tmp7, somme47);
-    printf("Somme 48 : %s + %s = %s\n", tmp6, tmp8, somme48);
-    printf("Somme 49 : %s + %s = %s\n", tmp7, tmp1, somme49);
-    printf("Somme 50 : %s + %s = %s\n", tmp7, tmp2, somme50);
-    printf("Somme 51 : %s + %s = %s\n", tmp7, tmp3, somme51);
-    printf("Somme 52 : %s + %s = %s\n", tmp7, tmp4, somme52);
-    printf("Somme 53 : %s + %s = %s\n", tmp7, tmp5, somme53);
-    printf("Somme 54 : %s + %s = %s\n", tmp7, tmp6, somme54);
-    printf("Somme 55 : %s + %s = %s\n", tmp7, tmp7, somme55);
-    printf("Somme 56 : %s + %s = %s\n", tmp7, tmp8, somme56);
-    printf("Somme 57 : %s + %s = %s\n", tmp8, tmp1, somme57);
-    printf("Somme 58 : %s + %s = %s\n", tmp8, tmp2, somme58);
-    printf("Somme 59 : %s + %s = %s\n", tmp8, tmp3, somme59);
-    printf("Somme 60 : %s + %s = %s\n", tmp8, tmp4, somme60);
-    printf("Somme 61 : %s + %s = %s\n", tmp8, tmp5, somme61);
-    printf("Somme 62 : %s + %s = %s\n", tmp8, tmp6, somme62);
-    printf("Somme 63 : %s + %s = %s\n", tmp8, tmp7, somme63);
-    printf("Somme 64 : %s + %s = %s\n", tmp8, tmp8, somme64);
-
-    printf("\n");
-}
-
-static void difference(char *str1, char *str2, char *str3, char *str4, long long ll1, long long ll2, long long ll3, long long ll4) {
-
-    unbounded_int chiffre1 = string2unbounded_int(str1),
-                  chiffre2 = string2unbounded_int(str2),
-                  chiffre3 = string2unbounded_int(str3),
-                  chiffre4 = string2unbounded_int(str4),
-                  chiffre5 = ll2unbounded_int(ll1),
-                  chiffre6 = ll2unbounded_int(ll2),
-                  chiffre7 = ll2unbounded_int(ll3),
-                  chiffre8 = ll2unbounded_int(ll4);
-
-    char *tmp1 = unbounded_int2string(chiffre1),
-         *tmp2 = unbounded_int2string(chiffre2),
-         *tmp3 = unbounded_int2string(chiffre3),
-         *tmp4 = unbounded_int2string(chiffre4),
-         *tmp5 = unbounded_int2string(chiffre5),
-         *tmp6 = unbounded_int2string(chiffre6),
-         *tmp7 = unbounded_int2string(chiffre7),
-         *tmp8 = unbounded_int2string(chiffre8);
-
-    printf("Chiffre 1 = %s\n", tmp1);
-    printf("Chiffre 2 = %s\n", tmp2);
-    printf("Chiffre 3 = %s\n", tmp3);
-    printf("Chiffre 4 = %s\n", tmp4);
-    printf("Chiffre 5 = %s\n", tmp5);
-    printf("Chiffre 6 = %s\n", tmp6);
-    printf("Chiffre 7 = %s\n", tmp7);
-    printf("Chiffre 8 = %s\n", tmp8);
+    printf("Somme 1 : %s + %s = %s\n", tmp1, tmp1, tmp_somme1);
+    printf("Somme 2 : %s + %s = %s\n", tmp1, tmp2, tmp_somme2);
+    printf("Somme 3 : %s + %s = %s\n", tmp1, tmp3, tmp_somme3);
+    printf("Somme 4 : %s + %s = %s\n", tmp1, tmp4, tmp_somme4);
+    printf("Somme 5 : %s + %s = %s\n", tmp1, tmp5, tmp_somme5);
+    printf("Somme 6 : %s + %s = %s\n", tmp1, tmp6, tmp_somme6);
+    printf("Somme 7 : %s + %s = %s\n", tmp1, tmp7, tmp_somme7);
+    printf("Somme 8 : %s + %s = %s\n", tmp1, tmp8, tmp_somme8);
+    printf("Somme 9 : %s + %s = %s\n", tmp2, tmp1, tmp_somme9);
+    printf("Somme 10 : %s + %s = %s\n", tmp2, tmp2, tmp_somme10);
+    printf("Somme 11 : %s + %s = %s\n", tmp2, tmp3, tmp_somme11);
+    printf("Somme 12 : %s + %s = %s\n", tmp2, tmp4, tmp_somme12);
+    printf("Somme 13 : %s + %s = %s\n", tmp2, tmp5, tmp_somme13);
+    printf("Somme 14 : %s + %s = %s\n", tmp2, tmp6, tmp_somme14);
+    printf("Somme 15 : %s + %s = %s\n", tmp2, tmp7, tmp_somme15);
+    printf("Somme 16 : %s + %s = %s\n", tmp2, tmp8, tmp_somme16);
+    printf("Somme 17 : %s + %s = %s\n", tmp3, tmp1, tmp_somme17);
+    printf("Somme 18 : %s + %s = %s\n", tmp3, tmp2, tmp_somme18);
+    printf("Somme 19 : %s + %s = %s\n", tmp3, tmp3, tmp_somme19);
+    printf("Somme 20 : %s + %s = %s\n", tmp3, tmp4, tmp_somme20);
+    printf("Somme 21 : %s + %s = %s\n", tmp3, tmp5, tmp_somme21);
+    printf("Somme 22 : %s + %s = %s\n", tmp3, tmp6, tmp_somme22);
+    printf("Somme 23 : %s + %s = %s\n", tmp3, tmp7, tmp_somme23);
+    printf("Somme 24 : %s + %s = %s\n", tmp3, tmp8, tmp_somme24);
+    printf("Somme 25 : %s + %s = %s\n", tmp4, tmp1, tmp_somme25);
+    printf("Somme 26 : %s + %s = %s\n", tmp4, tmp2, tmp_somme26);
+    printf("Somme 27 : %s + %s = %s\n", tmp4, tmp3, tmp_somme27);
+    printf("Somme 28 : %s + %s = %s\n", tmp4, tmp4, tmp_somme28);
+    printf("Somme 29 : %s + %s = %s\n", tmp4, tmp5, tmp_somme29);
+    printf("Somme 30 : %s + %s = %s\n", tmp4, tmp6, tmp_somme30);
+    printf("Somme 31 : %s + %s = %s\n", tmp4, tmp7, tmp_somme31);
+    printf("Somme 32 : %s + %s = %s\n", tmp4, tmp8, tmp_somme32);
+    printf("Somme 33 : %s + %s = %s\n", tmp5, tmp1, tmp_somme33);
+    printf("Somme 34 : %s + %s = %s\n", tmp5, tmp2, tmp_somme34);
+    printf("Somme 35 : %s + %s = %s\n", tmp5, tmp3, tmp_somme35);
+    printf("Somme 36 : %s + %s = %s\n", tmp5, tmp4, tmp_somme36);
+    printf("Somme 37 : %s + %s = %s\n", tmp5, tmp5, tmp_somme37);
+    printf("Somme 38 : %s + %s = %s\n", tmp5, tmp6, tmp_somme38);
+    printf("Somme 39 : %s + %s = %s\n", tmp5, tmp7, tmp_somme39);
+    printf("Somme 40 : %s + %s = %s\n", tmp5, tmp8, tmp_somme40);
+    printf("Somme 41 : %s + %s = %s\n", tmp6, tmp1, tmp_somme41);
+    printf("Somme 42 : %s + %s = %s\n", tmp6, tmp2, tmp_somme42);
+    printf("Somme 43 : %s + %s = %s\n", tmp6, tmp3, tmp_somme43);
+    printf("Somme 44 : %s + %s = %s\n", tmp6, tmp4, tmp_somme44);
+    printf("Somme 45 : %s + %s = %s\n", tmp6, tmp5, tmp_somme45);
+    printf("Somme 46 : %s + %s = %s\n", tmp6, tmp6, tmp_somme46);
+    printf("Somme 47 : %s + %s = %s\n", tmp6, tmp7, tmp_somme47);
+    printf("Somme 48 : %s + %s = %s\n", tmp6, tmp8, tmp_somme48);
+    printf("Somme 49 : %s + %s = %s\n", tmp7, tmp1, tmp_somme49);
+    printf("Somme 50 : %s + %s = %s\n", tmp7, tmp2, tmp_somme50);
+    printf("Somme 51 : %s + %s = %s\n", tmp7, tmp3, tmp_somme51);
+    printf("Somme 52 : %s + %s = %s\n", tmp7, tmp4, tmp_somme52);
+    printf("Somme 53 : %s + %s = %s\n", tmp7, tmp5, tmp_somme53);
+    printf("Somme 54 : %s + %s = %s\n", tmp7, tmp6, tmp_somme54);
+    printf("Somme 55 : %s + %s = %s\n", tmp7, tmp7, tmp_somme55);
+    printf("Somme 56 : %s + %s = %s\n", tmp7, tmp8, tmp_somme56);
+    printf("Somme 57 : %s + %s = %s\n", tmp8, tmp1, tmp_somme57);
+    printf("Somme 58 : %s + %s = %s\n", tmp8, tmp2, tmp_somme58);
+    printf("Somme 59 : %s + %s = %s\n", tmp8, tmp3, tmp_somme59);
+    printf("Somme 60 : %s + %s = %s\n", tmp8, tmp4, tmp_somme60);
+    printf("Somme 61 : %s + %s = %s\n", tmp8, tmp5, tmp_somme61);
+    printf("Somme 62 : %s + %s = %s\n", tmp8, tmp6, tmp_somme62);
+    printf("Somme 63 : %s + %s = %s\n", tmp8, tmp7, tmp_somme63);
+    printf("Somme 64 : %s + %s = %s\n", tmp8, tmp8, tmp_somme64);
 
     printf("\n");
 
+    /***************************************************** DIFFERENCE *****************************************************/
+    
     unbounded_int difference1 = unbounded_int_difference(chiffre1, chiffre1),
                   difference2 = unbounded_int_difference(chiffre1, chiffre2),
                   difference3 = unbounded_int_difference(chiffre1, chiffre3),
@@ -390,104 +371,74 @@ static void difference(char *str1, char *str2, char *str3, char *str4, long long
          *tmp_difference63 = unbounded_int2string(difference63),
          *tmp_difference64 = unbounded_int2string(difference64);
 
-    printf("Différence 1 : %s - %s = %s\n", tmp1, tmp1, difference1);
-    printf("Différence 2 : %s - %s = %s\n", tmp1, tmp2, difference2);
-    printf("Différence 3 : %s - %s = %s\n", tmp1, tmp3, difference3);
-    printf("Différence 4 : %s - %s = %s\n", tmp1, tmp4, difference4);
-    printf("Différence 5 : %s - %s = %s\n", tmp1, tmp5, difference5);
-    printf("Différence 6 : %s - %s = %s\n", tmp1, tmp6, difference6);
-    printf("Différence 7 : %s - %s = %s\n", tmp1, tmp7, difference7);
-    printf("Différence 8 : %s - %s = %s\n", tmp1, tmp8, difference8);
-    printf("Différence 9 : %s - %s = %s\n", tmp2, tmp1, difference9);
-    printf("Différence 10 : %s - %s = %s\n", tmp2, tmp2, difference10);
-    printf("Différence 11 : %s - %s = %s\n", tmp2, tmp3, difference11);
-    printf("Différence 12 : %s - %s = %s\n", tmp2, tmp4, difference12);
-    printf("Différence 13 : %s - %s = %s\n", tmp2, tmp5, difference13);
-    printf("Différence 14 : %s - %s = %s\n", tmp2, tmp6, difference14);
-    printf("Différence 15 : %s - %s = %s\n", tmp2, tmp7, difference15);
-    printf("Différence 16 : %s - %s = %s\n", tmp2, tmp8, difference16);
-    printf("Différence 17 : %s - %s = %s\n", tmp3, tmp1, difference17);
-    printf("Différence 18 : %s - %s = %s\n", tmp3, tmp2, difference18);
-    printf("Différence 19 : %s - %s = %s\n", tmp3, tmp3, difference19);
-    printf("Différence 20 : %s - %s = %s\n", tmp3, tmp4, difference20);
-    printf("Différence 21 : %s - %s = %s\n", tmp3, tmp5, difference21);
-    printf("Différence 22 : %s - %s = %s\n", tmp3, tmp6, difference22);
-    printf("Différence 23 : %s - %s = %s\n", tmp3, tmp7, difference23);
-    printf("Différence 24 : %s - %s = %s\n", tmp3, tmp8, difference24);
-    printf("Différence 25 : %s - %s = %s\n", tmp4, tmp1, difference25);
-    printf("Différence 26 : %s - %s = %s\n", tmp4, tmp2, difference26);
-    printf("Différence 27 : %s - %s = %s\n", tmp4, tmp3, difference27);
-    printf("Différence 28 : %s - %s = %s\n", tmp4, tmp4, difference28);
-    printf("Différence 29 : %s - %s = %s\n", tmp4, tmp5, difference29);
-    printf("Différence 30 : %s - %s = %s\n", tmp4, tmp6, difference30);
-    printf("Différence 31 : %s - %s = %s\n", tmp4, tmp7, difference31);
-    printf("Différence 32 : %s - %s = %s\n", tmp4, tmp8, difference32);
-    printf("Différence 33 : %s - %s = %s\n", tmp5, tmp1, difference33);
-    printf("Différence 34 : %s - %s = %s\n", tmp5, tmp2, difference34);
-    printf("Différence 35 : %s - %s = %s\n", tmp5, tmp3, difference35);
-    printf("Différence 36 : %s - %s = %s\n", tmp5, tmp4, difference36);
-    printf("Différence 37 : %s - %s = %s\n", tmp5, tmp5, difference37);
-    printf("Différence 38 : %s - %s = %s\n", tmp5, tmp6, difference38);
-    printf("Différence 39 : %s - %s = %s\n", tmp5, tmp7, difference39);
-    printf("Différence 40 : %s - %s = %s\n", tmp5, tmp8, difference40);
-    printf("Différence 41 : %s - %s = %s\n", tmp6, tmp1, difference41);
-    printf("Différence 42 : %s - %s = %s\n", tmp6, tmp2, difference42);
-    printf("Différence 43 : %s - %s = %s\n", tmp6, tmp3, difference43);
-    printf("Différence 44 : %s - %s = %s\n", tmp6, tmp4, difference44);
-    printf("Différence 45 : %s - %s = %s\n", tmp6, tmp5, difference45);
-    printf("Différence 46 : %s - %s = %s\n", tmp6, tmp6, difference46);
-    printf("Différence 47 : %s - %s = %s\n", tmp6, tmp7, difference47);
-    printf("Différence 48 : %s - %s = %s\n", tmp6, tmp8, difference48);
-    printf("Différence 49 : %s - %s = %s\n", tmp7, tmp1, difference49);
-    printf("Différence 50 : %s - %s = %s\n", tmp7, tmp2, difference50);
-    printf("Différence 51 : %s - %s = %s\n", tmp7, tmp3, difference51);
-    printf("Différence 52 : %s - %s = %s\n", tmp7, tmp4, difference52);
-    printf("Différence 53 : %s - %s = %s\n", tmp7, tmp5, difference53);
-    printf("Différence 54 : %s - %s = %s\n", tmp7, tmp6, difference54);
-    printf("Différence 55 : %s - %s = %s\n", tmp7, tmp7, difference55);
-    printf("Différence 56 : %s - %s = %s\n", tmp7, tmp8, difference56);
-    printf("Différence 57 : %s - %s = %s\n", tmp8, tmp1, difference57);
-    printf("Différence 58 : %s - %s = %s\n", tmp8, tmp2, difference58);
-    printf("Différence 59 : %s - %s = %s\n", tmp8, tmp3, difference59);
-    printf("Différence 60 : %s - %s = %s\n", tmp8, tmp4, difference60);
-    printf("Différence 61 : %s - %s = %s\n", tmp8, tmp5, difference61);
-    printf("Différence 62 : %s - %s = %s\n", tmp8, tmp6, difference62);
-    printf("Différence 63 : %s - %s = %s\n", tmp8, tmp7, difference63);
-    printf("Différence 64 : %s - %s = %s\n", tmp8, tmp8, difference64);
+    printf("Différence 1 : %s - %s = %s\n", tmp1, tmp1, tmp_difference1);
+    printf("Différence 2 : %s - %s = %s\n", tmp1, tmp2, tmp_difference2);
+    printf("Différence 3 : %s - %s = %s\n", tmp1, tmp3, tmp_difference3);
+    printf("Différence 4 : %s - %s = %s\n", tmp1, tmp4, tmp_difference4);
+    printf("Différence 5 : %s - %s = %s\n", tmp1, tmp5, tmp_difference5);
+    printf("Différence 6 : %s - %s = %s\n", tmp1, tmp6, tmp_difference6);
+    printf("Différence 7 : %s - %s = %s\n", tmp1, tmp7, tmp_difference7);
+    printf("Différence 8 : %s - %s = %s\n", tmp1, tmp8, tmp_difference8);
+    printf("Différence 9 : %s - %s = %s\n", tmp2, tmp1, tmp_difference9);
+    printf("Différence 10 : %s - %s = %s\n", tmp2, tmp2, tmp_difference10);
+    printf("Différence 11 : %s - %s = %s\n", tmp2, tmp3, tmp_difference11);
+    printf("Différence 12 : %s - %s = %s\n", tmp2, tmp4, tmp_difference12);
+    printf("Différence 13 : %s - %s = %s\n", tmp2, tmp5, tmp_difference13);
+    printf("Différence 14 : %s - %s = %s\n", tmp2, tmp6, tmp_difference14);
+    printf("Différence 15 : %s - %s = %s\n", tmp2, tmp7, tmp_difference15);
+    printf("Différence 16 : %s - %s = %s\n", tmp2, tmp8, tmp_difference16);
+    printf("Différence 17 : %s - %s = %s\n", tmp3, tmp1, tmp_difference17);
+    printf("Différence 18 : %s - %s = %s\n", tmp3, tmp2, tmp_difference18);
+    printf("Différence 19 : %s - %s = %s\n", tmp3, tmp3, tmp_difference19);
+    printf("Différence 20 : %s - %s = %s\n", tmp3, tmp4, tmp_difference20);
+    printf("Différence 21 : %s - %s = %s\n", tmp3, tmp5, tmp_difference21);
+    printf("Différence 22 : %s - %s = %s\n", tmp3, tmp6, tmp_difference22);
+    printf("Différence 23 : %s - %s = %s\n", tmp3, tmp7, tmp_difference23);
+    printf("Différence 24 : %s - %s = %s\n", tmp3, tmp8, tmp_difference24);
+    printf("Différence 25 : %s - %s = %s\n", tmp4, tmp1, tmp_difference25);
+    printf("Différence 26 : %s - %s = %s\n", tmp4, tmp2, tmp_difference26);
+    printf("Différence 27 : %s - %s = %s\n", tmp4, tmp3, tmp_difference27);
+    printf("Différence 28 : %s - %s = %s\n", tmp4, tmp4, tmp_difference28);
+    printf("Différence 29 : %s - %s = %s\n", tmp4, tmp5, tmp_difference29);
+    printf("Différence 30 : %s - %s = %s\n", tmp4, tmp6, tmp_difference30);
+    printf("Différence 31 : %s - %s = %s\n", tmp4, tmp7, tmp_difference31);
+    printf("Différence 32 : %s - %s = %s\n", tmp4, tmp8, tmp_difference32);
+    printf("Différence 33 : %s - %s = %s\n", tmp5, tmp1, tmp_difference33);
+    printf("Différence 34 : %s - %s = %s\n", tmp5, tmp2, tmp_difference34);
+    printf("Différence 35 : %s - %s = %s\n", tmp5, tmp3, tmp_difference35);
+    printf("Différence 36 : %s - %s = %s\n", tmp5, tmp4, tmp_difference36);
+    printf("Différence 37 : %s - %s = %s\n", tmp5, tmp5, tmp_difference37);
+    printf("Différence 38 : %s - %s = %s\n", tmp5, tmp6, tmp_difference38);
+    printf("Différence 39 : %s - %s = %s\n", tmp5, tmp7, tmp_difference39);
+    printf("Différence 40 : %s - %s = %s\n", tmp5, tmp8, tmp_difference40);
+    printf("Différence 41 : %s - %s = %s\n", tmp6, tmp1, tmp_difference41);
+    printf("Différence 42 : %s - %s = %s\n", tmp6, tmp2, tmp_difference42);
+    printf("Différence 43 : %s - %s = %s\n", tmp6, tmp3, tmp_difference43);
+    printf("Différence 44 : %s - %s = %s\n", tmp6, tmp4, tmp_difference44);
+    printf("Différence 45 : %s - %s = %s\n", tmp6, tmp5, tmp_difference45);
+    printf("Différence 46 : %s - %s = %s\n", tmp6, tmp6, tmp_difference46);
+    printf("Différence 47 : %s - %s = %s\n", tmp6, tmp7, tmp_difference47);
+    printf("Différence 48 : %s - %s = %s\n", tmp6, tmp8, tmp_difference48);
+    printf("Différence 49 : %s - %s = %s\n", tmp7, tmp1, tmp_difference49);
+    printf("Différence 50 : %s - %s = %s\n", tmp7, tmp2, tmp_difference50);
+    printf("Différence 51 : %s - %s = %s\n", tmp7, tmp3, tmp_difference51);
+    printf("Différence 52 : %s - %s = %s\n", tmp7, tmp4, tmp_difference52);
+    printf("Différence 53 : %s - %s = %s\n", tmp7, tmp5, tmp_difference53);
+    printf("Différence 54 : %s - %s = %s\n", tmp7, tmp6, tmp_difference54);
+    printf("Différence 55 : %s - %s = %s\n", tmp7, tmp7, tmp_difference55);
+    printf("Différence 56 : %s - %s = %s\n", tmp7, tmp8, tmp_difference56);
+    printf("Différence 57 : %s - %s = %s\n", tmp8, tmp1, tmp_difference57);
+    printf("Différence 58 : %s - %s = %s\n", tmp8, tmp2, tmp_difference58);
+    printf("Différence 59 : %s - %s = %s\n", tmp8, tmp3, tmp_difference59);
+    printf("Différence 60 : %s - %s = %s\n", tmp8, tmp4, tmp_difference60);
+    printf("Différence 61 : %s - %s = %s\n", tmp8, tmp5, tmp_difference61);
+    printf("Différence 62 : %s - %s = %s\n", tmp8, tmp6, tmp_difference62);
+    printf("Différence 63 : %s - %s = %s\n", tmp8, tmp7, tmp_difference63);
+    printf("Différence 64 : %s - %s = %s\n", tmp8, tmp8, tmp_difference64);
 
     printf("\n");
-}
 
-static void produit(char *str1, char *str2, char *str3, char *str4, long long ll1, long long ll2, long long ll3, long long ll4) {
-
-    unbounded_int chiffre1 = string2unbounded_int(str1),
-                  chiffre2 = string2unbounded_int(str2),
-                  chiffre3 = string2unbounded_int(str3),
-                  chiffre4 = string2unbounded_int(str4),
-                  chiffre5 = ll2unbounded_int(ll1),
-                  chiffre6 = ll2unbounded_int(ll2),
-                  chiffre7 = ll2unbounded_int(ll3),
-                  chiffre8 = ll2unbounded_int(ll4);
-
-    char *tmp1 = unbounded_int2string(chiffre1),
-         *tmp2 = unbounded_int2string(chiffre2),
-         *tmp3 = unbounded_int2string(chiffre3),
-         *tmp4 = unbounded_int2string(chiffre4),
-         *tmp5 = unbounded_int2string(chiffre5),
-         *tmp6 = unbounded_int2string(chiffre6),
-         *tmp7 = unbounded_int2string(chiffre7),
-         *tmp8 = unbounded_int2string(chiffre8);
-
-    printf("Chiffre 1 = %s\n", tmp1);
-    printf("Chiffre 2 = %s\n", tmp2);
-    printf("Chiffre 3 = %s\n", tmp3);
-    printf("Chiffre 4 = %s\n", tmp4);
-    printf("Chiffre 5 = %s\n", tmp5);
-    printf("Chiffre 6 = %s\n", tmp6);
-    printf("Chiffre 7 = %s\n", tmp7);
-    printf("Chiffre 8 = %s\n", tmp8);
-
-    printf("\n");
+    /***************************************************** PRODUIT *****************************************************/
 
     unbounded_int produit1 = unbounded_int_produit(chiffre1, chiffre1),
                   produit2 = unbounded_int_produit(chiffre1, chiffre2),
@@ -619,104 +570,74 @@ static void produit(char *str1, char *str2, char *str3, char *str4, long long ll
          *tmp_produit63 = unbounded_int2string(produit63),
          *tmp_produit64 = unbounded_int2string(produit64);
 
-    printf("Produit 1 : %s * %s = %s\n", tmp1, tmp1, produit1);
-    printf("Produit 2 : %s * %s = %s\n", tmp1, tmp2, produit2);
-    printf("Produit 3 : %s * %s = %s\n", tmp1, tmp3, produit3);
-    printf("Produit 4 : %s * %s = %s\n", tmp1, tmp4, produit4);
-    printf("Produit 5 : %s * %s = %s\n", tmp1, tmp5, produit5);
-    printf("Produit 6 : %s * %s = %s\n", tmp1, tmp6, produit6);
-    printf("Produit 7 : %s * %s = %s\n", tmp1, tmp7, produit7);
-    printf("Produit 8 : %s * %s = %s\n", tmp1, tmp8, produit8);
-    printf("Produit 9 : %s * %s = %s\n", tmp2, tmp1, produit9);
-    printf("Produit 10 : %s * %s = %s\n", tmp2, tmp2, produit10);
-    printf("Produit 11 : %s * %s = %s\n", tmp2, tmp3, produit11);
-    printf("Produit 12 : %s * %s = %s\n", tmp2, tmp4, produit12);
-    printf("Produit 13 : %s * %s = %s\n", tmp2, tmp5, produit13);
-    printf("Produit 14 : %s * %s = %s\n", tmp2, tmp6, produit14);
-    printf("Produit 15 : %s * %s = %s\n", tmp2, tmp7, produit15);
-    printf("Produit 16 : %s * %s = %s\n", tmp2, tmp8, produit16);
-    printf("Produit 17 : %s * %s = %s\n", tmp3, tmp1, produit17);
-    printf("Produit 18 : %s * %s = %s\n", tmp3, tmp2, produit18);
-    printf("Produit 19 : %s * %s = %s\n", tmp3, tmp3, produit19);
-    printf("Produit 20 : %s * %s = %s\n", tmp3, tmp4, produit20);
-    printf("Produit 21 : %s * %s = %s\n", tmp3, tmp5, produit21);
-    printf("Produit 22 : %s * %s = %s\n", tmp3, tmp6, produit22);
-    printf("Produit 23 : %s * %s = %s\n", tmp3, tmp7, produit23);
-    printf("Produit 24 : %s * %s = %s\n", tmp3, tmp8, produit24);
-    printf("Produit 25 : %s * %s = %s\n", tmp4, tmp1, produit25);
-    printf("Produit 26 : %s * %s = %s\n", tmp4, tmp2, produit26);
-    printf("Produit 27 : %s * %s = %s\n", tmp4, tmp3, produit27);
-    printf("Produit 28 : %s * %s = %s\n", tmp4, tmp4, produit28);
-    printf("Produit 29 : %s * %s = %s\n", tmp4, tmp5, produit29);
-    printf("Produit 30 : %s * %s = %s\n", tmp4, tmp6, produit30);
-    printf("Produit 31 : %s * %s = %s\n", tmp4, tmp7, produit31);
-    printf("Produit 32 : %s * %s = %s\n", tmp4, tmp8, produit32);
-    printf("Produit 33 : %s * %s = %s\n", tmp5, tmp1, produit33);
-    printf("Produit 34 : %s * %s = %s\n", tmp5, tmp2, produit34);
-    printf("Produit 35 : %s * %s = %s\n", tmp5, tmp3, produit35);
-    printf("Produit 36 : %s * %s = %s\n", tmp5, tmp4, produit36);
-    printf("Produit 37 : %s * %s = %s\n", tmp5, tmp5, produit37);
-    printf("Produit 38 : %s * %s = %s\n", tmp5, tmp6, produit38);
-    printf("Produit 39 : %s * %s = %s\n", tmp5, tmp7, produit39);
-    printf("Produit 40 : %s * %s = %s\n", tmp5, tmp8, produit40);
-    printf("Produit 41 : %s * %s = %s\n", tmp6, tmp1, produit41);
-    printf("Produit 42 : %s * %s = %s\n", tmp6, tmp2, produit42);
-    printf("Produit 43 : %s * %s = %s\n", tmp6, tmp3, produit43);
-    printf("Produit 44 : %s * %s = %s\n", tmp6, tmp4, produit44);
-    printf("Produit 45 : %s * %s = %s\n", tmp6, tmp5, produit45);
-    printf("Produit 46 : %s * %s = %s\n", tmp6, tmp6, produit46);
-    printf("Produit 47 : %s * %s = %s\n", tmp6, tmp7, produit47);
-    printf("Produit 48 : %s * %s = %s\n", tmp6, tmp8, produit48);
-    printf("Produit 49 : %s * %s = %s\n", tmp7, tmp1, produit49);
-    printf("Produit 50 : %s * %s = %s\n", tmp7, tmp2, produit50);
-    printf("Produit 51 : %s * %s = %s\n", tmp7, tmp3, produit51);
-    printf("Produit 52 : %s * %s = %s\n", tmp7, tmp4, produit52);
-    printf("Produit 53 : %s * %s = %s\n", tmp7, tmp5, produit53);
-    printf("Produit 54 : %s * %s = %s\n", tmp7, tmp6, produit54);
-    printf("Produit 55 : %s * %s = %s\n", tmp7, tmp7, produit55);
-    printf("Produit 56 : %s * %s = %s\n", tmp7, tmp8, produit56);
-    printf("Produit 57 : %s * %s = %s\n", tmp8, tmp1, produit57);
-    printf("Produit 58 : %s * %s = %s\n", tmp8, tmp2, produit58);
-    printf("Produit 59 : %s * %s = %s\n", tmp8, tmp3, produit59);
-    printf("Produit 60 : %s * %s = %s\n", tmp8, tmp4, produit60);
-    printf("Produit 61 : %s * %s = %s\n", tmp8, tmp5, produit61);
-    printf("Produit 62 : %s * %s = %s\n", tmp8, tmp6, produit62);
-    printf("Produit 63 : %s * %s = %s\n", tmp8, tmp7, produit63);
-    printf("Produit 64 : %s * %s = %s\n", tmp8, tmp8, produit64);
+    printf("Produit 1 : %s * %s = %s\n", tmp1, tmp1, tmp_produit1);
+    printf("Produit 2 : %s * %s = %s\n", tmp1, tmp2, tmp_produit2);
+    printf("Produit 3 : %s * %s = %s\n", tmp1, tmp3, tmp_produit3);
+    printf("Produit 4 : %s * %s = %s\n", tmp1, tmp4, tmp_produit4);
+    printf("Produit 5 : %s * %s = %s\n", tmp1, tmp5, tmp_produit5);
+    printf("Produit 6 : %s * %s = %s\n", tmp1, tmp6, tmp_produit6);
+    printf("Produit 7 : %s * %s = %s\n", tmp1, tmp7, tmp_produit7);
+    printf("Produit 8 : %s * %s = %s\n", tmp1, tmp8, tmp_produit8);
+    printf("Produit 9 : %s * %s = %s\n", tmp2, tmp1, tmp_produit9);
+    printf("Produit 10 : %s * %s = %s\n", tmp2, tmp2, tmp_produit10);
+    printf("Produit 11 : %s * %s = %s\n", tmp2, tmp3, tmp_produit11);
+    printf("Produit 12 : %s * %s = %s\n", tmp2, tmp4, tmp_produit12);
+    printf("Produit 13 : %s * %s = %s\n", tmp2, tmp5, tmp_produit13);
+    printf("Produit 14 : %s * %s = %s\n", tmp2, tmp6, tmp_produit14);
+    printf("Produit 15 : %s * %s = %s\n", tmp2, tmp7, tmp_produit15);
+    printf("Produit 16 : %s * %s = %s\n", tmp2, tmp8, tmp_produit16);
+    printf("Produit 17 : %s * %s = %s\n", tmp3, tmp1, tmp_produit17);
+    printf("Produit 18 : %s * %s = %s\n", tmp3, tmp2, tmp_produit18);
+    printf("Produit 19 : %s * %s = %s\n", tmp3, tmp3, tmp_produit19);
+    printf("Produit 20 : %s * %s = %s\n", tmp3, tmp4, tmp_produit20);
+    printf("Produit 21 : %s * %s = %s\n", tmp3, tmp5, tmp_produit21);
+    printf("Produit 22 : %s * %s = %s\n", tmp3, tmp6, tmp_produit22);
+    printf("Produit 23 : %s * %s = %s\n", tmp3, tmp7, tmp_produit23);
+    printf("Produit 24 : %s * %s = %s\n", tmp3, tmp8, tmp_produit24);
+    printf("Produit 25 : %s * %s = %s\n", tmp4, tmp1, tmp_produit25);
+    printf("Produit 26 : %s * %s = %s\n", tmp4, tmp2, tmp_produit26);
+    printf("Produit 27 : %s * %s = %s\n", tmp4, tmp3, tmp_produit27);
+    printf("Produit 28 : %s * %s = %s\n", tmp4, tmp4, tmp_produit28);
+    printf("Produit 29 : %s * %s = %s\n", tmp4, tmp5, tmp_produit29);
+    printf("Produit 30 : %s * %s = %s\n", tmp4, tmp6, tmp_produit30);
+    printf("Produit 31 : %s * %s = %s\n", tmp4, tmp7, tmp_produit31);
+    printf("Produit 32 : %s * %s = %s\n", tmp4, tmp8, tmp_produit32);
+    printf("Produit 33 : %s * %s = %s\n", tmp5, tmp1, tmp_produit33);
+    printf("Produit 34 : %s * %s = %s\n", tmp5, tmp2, tmp_produit34);
+    printf("Produit 35 : %s * %s = %s\n", tmp5, tmp3, tmp_produit35);
+    printf("Produit 36 : %s * %s = %s\n", tmp5, tmp4, tmp_produit36);
+    printf("Produit 37 : %s * %s = %s\n", tmp5, tmp5, tmp_produit37);
+    printf("Produit 38 : %s * %s = %s\n", tmp5, tmp6, tmp_produit38);
+    printf("Produit 39 : %s * %s = %s\n", tmp5, tmp7, tmp_produit39);
+    printf("Produit 40 : %s * %s = %s\n", tmp5, tmp8, tmp_produit40);
+    printf("Produit 41 : %s * %s = %s\n", tmp6, tmp1, tmp_produit41);
+    printf("Produit 42 : %s * %s = %s\n", tmp6, tmp2, tmp_produit42);
+    printf("Produit 43 : %s * %s = %s\n", tmp6, tmp3, tmp_produit43);
+    printf("Produit 44 : %s * %s = %s\n", tmp6, tmp4, tmp_produit44);
+    printf("Produit 45 : %s * %s = %s\n", tmp6, tmp5, tmp_produit45);
+    printf("Produit 46 : %s * %s = %s\n", tmp6, tmp6, tmp_produit46);
+    printf("Produit 47 : %s * %s = %s\n", tmp6, tmp7, tmp_produit47);
+    printf("Produit 48 : %s * %s = %s\n", tmp6, tmp8, tmp_produit48);
+    printf("Produit 49 : %s * %s = %s\n", tmp7, tmp1, tmp_produit49);
+    printf("Produit 50 : %s * %s = %s\n", tmp7, tmp2, tmp_produit50);
+    printf("Produit 51 : %s * %s = %s\n", tmp7, tmp3, tmp_produit51);
+    printf("Produit 52 : %s * %s = %s\n", tmp7, tmp4, tmp_produit52);
+    printf("Produit 53 : %s * %s = %s\n", tmp7, tmp5, tmp_produit53);
+    printf("Produit 54 : %s * %s = %s\n", tmp7, tmp6, tmp_produit54);
+    printf("Produit 55 : %s * %s = %s\n", tmp7, tmp7, tmp_produit55);
+    printf("Produit 56 : %s * %s = %s\n", tmp7, tmp8, tmp_produit56);
+    printf("Produit 57 : %s * %s = %s\n", tmp8, tmp1, tmp_produit57);
+    printf("Produit 58 : %s * %s = %s\n", tmp8, tmp2, tmp_produit58);
+    printf("Produit 59 : %s * %s = %s\n", tmp8, tmp3, tmp_produit59);
+    printf("Produit 60 : %s * %s = %s\n", tmp8, tmp4, tmp_produit60);
+    printf("Produit 61 : %s * %s = %s\n", tmp8, tmp5, tmp_produit61);
+    printf("Produit 62 : %s * %s = %s\n", tmp8, tmp6, tmp_produit62);
+    printf("Produit 63 : %s * %s = %s\n", tmp8, tmp7, tmp_produit63);
+    printf("Produit 64 : %s * %s = %s\n", tmp8, tmp8, tmp_produit64);
 
     printf("\n");
-}
 
-static void quotient(char *str1, char *str2, char *str3, char *str4, long long ll1, long long ll2, long long ll3, long long ll4) {
-
-    unbounded_int chiffre1 = string2unbounded_int(str1),
-                  chiffre2 = string2unbounded_int(str2),
-                  chiffre3 = string2unbounded_int(str3),
-                  chiffre4 = string2unbounded_int(str4),
-                  chiffre5 = ll2unbounded_int(ll1),
-                  chiffre6 = ll2unbounded_int(ll2),
-                  chiffre7 = ll2unbounded_int(ll3),
-                  chiffre8 = ll2unbounded_int(ll4);
-
-    char *tmp1 = unbounded_int2string(chiffre1),
-         *tmp2 = unbounded_int2string(chiffre2),
-         *tmp3 = unbounded_int2string(chiffre3),
-         *tmp4 = unbounded_int2string(chiffre4),
-         *tmp5 = unbounded_int2string(chiffre5),
-         *tmp6 = unbounded_int2string(chiffre6),
-         *tmp7 = unbounded_int2string(chiffre7),
-         *tmp8 = unbounded_int2string(chiffre8);
-
-    printf("Chiffre 1 = %s\n", tmp1);
-    printf("Chiffre 2 = %s\n", tmp2);
-    printf("Chiffre 3 = %s\n", tmp3);
-    printf("Chiffre 4 = %s\n", tmp4);
-    printf("Chiffre 5 = %s\n", tmp5);
-    printf("Chiffre 6 = %s\n", tmp6);
-    printf("Chiffre 7 = %s\n", tmp7);
-    printf("Chiffre 8 = %s\n", tmp8);
-
-    printf("\n");
+    /***************************************************** QUOTIENT *****************************************************/
 
     unbounded_int quotient1 = unbounded_int_quotient(chiffre1, chiffre1),
                   quotient2 = unbounded_int_quotient(chiffre1, chiffre2),
@@ -848,104 +769,74 @@ static void quotient(char *str1, char *str2, char *str3, char *str4, long long l
          *tmp_quotient63 = unbounded_int2string(quotient63),
          *tmp_quotient64 = unbounded_int2string(quotient64);
 
-    printf("Quotient 1 : %s / %s = %s\n", tmp1, tmp1, quotient1);
-    printf("Quotient 2 : %s / %s = %s\n", tmp1, tmp2, quotient2);
-    printf("Quotient 3 : %s / %s = %s\n", tmp1, tmp3, quotient3);
-    printf("Quotient 4 : %s / %s = %s\n", tmp1, tmp4, quotient4);
-    printf("Quotient 5 : %s / %s = %s\n", tmp1, tmp5, quotient5);
-    printf("Quotient 6 : %s / %s = %s\n", tmp1, tmp6, quotient6);
-    printf("Quotient 7 : %s / %s = %s\n", tmp1, tmp7, quotient7);
-    printf("Quotient 8 : %s / %s = %s\n", tmp1, tmp8, quotient8);
-    printf("Quotient 9 : %s / %s = %s\n", tmp2, tmp1, quotient9);
-    printf("Quotient 10 : %s / %s = %s\n", tmp2, tmp2, quotient10);
-    printf("Quotient 11 : %s / %s = %s\n", tmp2, tmp3, quotient11);
-    printf("Quotient 12 : %s / %s = %s\n", tmp2, tmp4, quotient12);
-    printf("Quotient 13 : %s / %s = %s\n", tmp2, tmp5, quotient13);
-    printf("Quotient 14 : %s / %s = %s\n", tmp2, tmp6, quotient14);
-    printf("Quotient 15 : %s / %s = %s\n", tmp2, tmp7, quotient15);
-    printf("Quotient 16 : %s / %s = %s\n", tmp2, tmp8, quotient16);
-    printf("Quotient 17 : %s / %s = %s\n", tmp3, tmp1, quotient17);
-    printf("Quotient 18 : %s / %s = %s\n", tmp3, tmp2, quotient18);
-    printf("Quotient 19 : %s / %s = %s\n", tmp3, tmp3, quotient19);
-    printf("Quotient 20 : %s / %s = %s\n", tmp3, tmp4, quotient20);
-    printf("Quotient 21 : %s / %s = %s\n", tmp3, tmp5, quotient21);
-    printf("Quotient 22 : %s / %s = %s\n", tmp3, tmp6, quotient22);
-    printf("Quotient 23 : %s / %s = %s\n", tmp3, tmp7, quotient23);
-    printf("Quotient 24 : %s / %s = %s\n", tmp3, tmp8, quotient24);
-    printf("Quotient 25 : %s / %s = %s\n", tmp4, tmp1, quotient25);
-    printf("Quotient 26 : %s / %s = %s\n", tmp4, tmp2, quotient26);
-    printf("Quotient 27 : %s / %s = %s\n", tmp4, tmp3, quotient27);
-    printf("Quotient 28 : %s / %s = %s\n", tmp4, tmp4, quotient28);
-    printf("Quotient 29 : %s / %s = %s\n", tmp4, tmp5, quotient29);
-    printf("Quotient 30 : %s / %s = %s\n", tmp4, tmp6, quotient30);
-    printf("Quotient 31 : %s / %s = %s\n", tmp4, tmp7, quotient31);
-    printf("Quotient 32 : %s / %s = %s\n", tmp4, tmp8, quotient32);
-    printf("Quotient 33 : %s / %s = %s\n", tmp5, tmp1, quotient33);
-    printf("Quotient 34 : %s / %s = %s\n", tmp5, tmp2, quotient34);
-    printf("Quotient 35 : %s / %s = %s\n", tmp5, tmp3, quotient35);
-    printf("Quotient 36 : %s / %s = %s\n", tmp5, tmp4, quotient36);
-    printf("Quotient 37 : %s / %s = %s\n", tmp5, tmp5, quotient37);
-    printf("Quotient 38 : %s / %s = %s\n", tmp5, tmp6, quotient38);
-    printf("Quotient 39 : %s / %s = %s\n", tmp5, tmp7, quotient39);
-    printf("Quotient 40 : %s / %s = %s\n", tmp5, tmp8, quotient40);
-    printf("Quotient 41 : %s / %s = %s\n", tmp6, tmp1, quotient41);
-    printf("Quotient 42 : %s / %s = %s\n", tmp6, tmp2, quotient42);
-    printf("Quotient 43 : %s / %s = %s\n", tmp6, tmp3, quotient43);
-    printf("Quotient 44 : %s / %s = %s\n", tmp6, tmp4, quotient44);
-    printf("Quotient 45 : %s / %s = %s\n", tmp6, tmp5, quotient45);
-    printf("Quotient 46 : %s / %s = %s\n", tmp6, tmp6, quotient46);
-    printf("Quotient 47 : %s / %s = %s\n", tmp6, tmp7, quotient47);
-    printf("Quotient 48 : %s / %s = %s\n", tmp6, tmp8, quotient48);
-    printf("Quotient 49 : %s / %s = %s\n", tmp7, tmp1, quotient49);
-    printf("Quotient 50 : %s / %s = %s\n", tmp7, tmp2, quotient50);
-    printf("Quotient 51 : %s / %s = %s\n", tmp7, tmp3, quotient51);
-    printf("Quotient 52 : %s / %s = %s\n", tmp7, tmp4, quotient52);
-    printf("Quotient 53 : %s / %s = %s\n", tmp7, tmp5, quotient53);
-    printf("Quotient 54 : %s / %s = %s\n", tmp7, tmp6, quotient54);
-    printf("Quotient 55 : %s / %s = %s\n", tmp7, tmp7, quotient55);
-    printf("Quotient 56 : %s / %s = %s\n", tmp7, tmp8, quotient56);
-    printf("Quotient 57 : %s / %s = %s\n", tmp8, tmp1, quotient57);
-    printf("Quotient 58 : %s / %s = %s\n", tmp8, tmp2, quotient58);
-    printf("Quotient 59 : %s / %s = %s\n", tmp8, tmp3, quotient59);
-    printf("Quotient 60 : %s / %s = %s\n", tmp8, tmp4, quotient60);
-    printf("Quotient 61 : %s / %s = %s\n", tmp8, tmp5, quotient61);
-    printf("Quotient 62 : %s / %s = %s\n", tmp8, tmp6, quotient62);
-    printf("Quotient 63 : %s / %s = %s\n", tmp8, tmp7, quotient63);
-    printf("Quotient 64 : %s / %s = %s\n", tmp8, tmp8, quotient64);
+    printf("Quotient 1 : %s / %s = %s\n", tmp1, tmp1, tmp_quotient1);
+    printf("Quotient 2 : %s / %s = %s\n", tmp1, tmp2, tmp_quotient2);
+    printf("Quotient 3 : %s / %s = %s\n", tmp1, tmp3, tmp_quotient3);
+    printf("Quotient 4 : %s / %s = %s\n", tmp1, tmp4, tmp_quotient4);
+    printf("Quotient 5 : %s / %s = %s\n", tmp1, tmp5, tmp_quotient5);
+    printf("Quotient 6 : %s / %s = %s\n", tmp1, tmp6, tmp_quotient6);
+    printf("Quotient 7 : %s / %s = %s\n", tmp1, tmp7, tmp_quotient7);
+    printf("Quotient 8 : %s / %s = %s\n", tmp1, tmp8, tmp_quotient8);
+    printf("Quotient 9 : %s / %s = %s\n", tmp2, tmp1, tmp_quotient9);
+    printf("Quotient 10 : %s / %s = %s\n", tmp2, tmp2, tmp_quotient10);
+    printf("Quotient 11 : %s / %s = %s\n", tmp2, tmp3, tmp_quotient11);
+    printf("Quotient 12 : %s / %s = %s\n", tmp2, tmp4, tmp_quotient12);
+    printf("Quotient 13 : %s / %s = %s\n", tmp2, tmp5, tmp_quotient13);
+    printf("Quotient 14 : %s / %s = %s\n", tmp2, tmp6, tmp_quotient14);
+    printf("Quotient 15 : %s / %s = %s\n", tmp2, tmp7, tmp_quotient15);
+    printf("Quotient 16 : %s / %s = %s\n", tmp2, tmp8, tmp_quotient16);
+    printf("Quotient 17 : %s / %s = %s\n", tmp3, tmp1, tmp_quotient17);
+    printf("Quotient 18 : %s / %s = %s\n", tmp3, tmp2, tmp_quotient18);
+    printf("Quotient 19 : %s / %s = %s\n", tmp3, tmp3, tmp_quotient19);
+    printf("Quotient 20 : %s / %s = %s\n", tmp3, tmp4, tmp_quotient20);
+    printf("Quotient 21 : %s / %s = %s\n", tmp3, tmp5, tmp_quotient21);
+    printf("Quotient 22 : %s / %s = %s\n", tmp3, tmp6, tmp_quotient22);
+    printf("Quotient 23 : %s / %s = %s\n", tmp3, tmp7, tmp_quotient23);
+    printf("Quotient 24 : %s / %s = %s\n", tmp3, tmp8, tmp_quotient24);
+    printf("Quotient 25 : %s / %s = %s\n", tmp4, tmp1, tmp_quotient25);
+    printf("Quotient 26 : %s / %s = %s\n", tmp4, tmp2, tmp_quotient26);
+    printf("Quotient 27 : %s / %s = %s\n", tmp4, tmp3, tmp_quotient27);
+    printf("Quotient 28 : %s / %s = %s\n", tmp4, tmp4, tmp_quotient28);
+    printf("Quotient 29 : %s / %s = %s\n", tmp4, tmp5, tmp_quotient29);
+    printf("Quotient 30 : %s / %s = %s\n", tmp4, tmp6, tmp_quotient30);
+    printf("Quotient 31 : %s / %s = %s\n", tmp4, tmp7, tmp_quotient31);
+    printf("Quotient 32 : %s / %s = %s\n", tmp4, tmp8, tmp_quotient32);
+    printf("Quotient 33 : %s / %s = %s\n", tmp5, tmp1, tmp_quotient33);
+    printf("Quotient 34 : %s / %s = %s\n", tmp5, tmp2, tmp_quotient34);
+    printf("Quotient 35 : %s / %s = %s\n", tmp5, tmp3, tmp_quotient35);
+    printf("Quotient 36 : %s / %s = %s\n", tmp5, tmp4, tmp_quotient36);
+    printf("Quotient 37 : %s / %s = %s\n", tmp5, tmp5, tmp_quotient37);
+    printf("Quotient 38 : %s / %s = %s\n", tmp5, tmp6, tmp_quotient38);
+    printf("Quotient 39 : %s / %s = %s\n", tmp5, tmp7, tmp_quotient39);
+    printf("Quotient 40 : %s / %s = %s\n", tmp5, tmp8, tmp_quotient40);
+    printf("Quotient 41 : %s / %s = %s\n", tmp6, tmp1, tmp_quotient41);
+    printf("Quotient 42 : %s / %s = %s\n", tmp6, tmp2, tmp_quotient42);
+    printf("Quotient 43 : %s / %s = %s\n", tmp6, tmp3, tmp_quotient43);
+    printf("Quotient 44 : %s / %s = %s\n", tmp6, tmp4, tmp_quotient44);
+    printf("Quotient 45 : %s / %s = %s\n", tmp6, tmp5, tmp_quotient45);
+    printf("Quotient 46 : %s / %s = %s\n", tmp6, tmp6, tmp_quotient46);
+    printf("Quotient 47 : %s / %s = %s\n", tmp6, tmp7, tmp_quotient47);
+    printf("Quotient 48 : %s / %s = %s\n", tmp6, tmp8, tmp_quotient48);
+    printf("Quotient 49 : %s / %s = %s\n", tmp7, tmp1, tmp_quotient49);
+    printf("Quotient 50 : %s / %s = %s\n", tmp7, tmp2, tmp_quotient50);
+    printf("Quotient 51 : %s / %s = %s\n", tmp7, tmp3, tmp_quotient51);
+    printf("Quotient 52 : %s / %s = %s\n", tmp7, tmp4, tmp_quotient52);
+    printf("Quotient 53 : %s / %s = %s\n", tmp7, tmp5, tmp_quotient53);
+    printf("Quotient 54 : %s / %s = %s\n", tmp7, tmp6, tmp_quotient54);
+    printf("Quotient 55 : %s / %s = %s\n", tmp7, tmp7, tmp_quotient55);
+    printf("Quotient 56 : %s / %s = %s\n", tmp7, tmp8, tmp_quotient56);
+    printf("Quotient 57 : %s / %s = %s\n", tmp8, tmp1, tmp_quotient57);
+    printf("Quotient 58 : %s / %s = %s\n", tmp8, tmp2, tmp_quotient58);
+    printf("Quotient 59 : %s / %s = %s\n", tmp8, tmp3, tmp_quotient59);
+    printf("Quotient 60 : %s / %s = %s\n", tmp8, tmp4, tmp_quotient60);
+    printf("Quotient 61 : %s / %s = %s\n", tmp8, tmp5, tmp_quotient61);
+    printf("Quotient 62 : %s / %s = %s\n", tmp8, tmp6, tmp_quotient62);
+    printf("Quotient 63 : %s / %s = %s\n", tmp8, tmp7, tmp_quotient63);
+    printf("Quotient 64 : %s / %s = %s\n", tmp8, tmp8, tmp_quotient64);
 
     printf("\n");
-}
 
-static void modulo(char *str1, char *str2, char *str3, char *str4, long long ll1, long long ll2, long long ll3, long long ll4) {
-
-    unbounded_int chiffre1 = string2unbounded_int(str1),
-                  chiffre2 = string2unbounded_int(str2),
-                  chiffre3 = string2unbounded_int(str3),
-                  chiffre4 = string2unbounded_int(str4),
-                  chiffre5 = ll2unbounded_int(ll1),
-                  chiffre6 = ll2unbounded_int(ll2),
-                  chiffre7 = ll2unbounded_int(ll3),
-                  chiffre8 = ll2unbounded_int(ll4);
-
-    char *tmp1 = unbounded_int2string(chiffre1),
-         *tmp2 = unbounded_int2string(chiffre2),
-         *tmp3 = unbounded_int2string(chiffre3),
-         *tmp4 = unbounded_int2string(chiffre4),
-         *tmp5 = unbounded_int2string(chiffre5),
-         *tmp6 = unbounded_int2string(chiffre6),
-         *tmp7 = unbounded_int2string(chiffre7),
-         *tmp8 = unbounded_int2string(chiffre8);
-
-    printf("Chiffre 1 = %s\n", tmp1);
-    printf("Chiffre 2 = %s\n", tmp2);
-    printf("Chiffre 3 = %s\n", tmp3);
-    printf("Chiffre 4 = %s\n", tmp4);
-    printf("Chiffre 5 = %s\n", tmp5);
-    printf("Chiffre 6 = %s\n", tmp6);
-    printf("Chiffre 7 = %s\n", tmp7);
-    printf("Chiffre 8 = %s\n", tmp8);
-
-    printf("\n");
+    /***************************************************** MODULO *****************************************************/
 
     unbounded_int modulo1 = unbounded_int_modulo(chiffre1, chiffre1),
                   modulo2 = unbounded_int_modulo(chiffre1, chiffre2),
@@ -1077,88 +968,69 @@ static void modulo(char *str1, char *str2, char *str3, char *str4, long long ll1
          *tmp_modulo63 = unbounded_int2string(modulo63),
          *tmp_modulo64 = unbounded_int2string(modulo64);
 
-    printf("Modulo 1 : %s = %s  [ %s ]\n", tmp1, modulo1, tmp1);
-    printf("Modulo 2 : %s = %s  [ %s ]\n", tmp1, modulo2, tmp2);
-    printf("Modulo 3 : %s = %s  [ %s ]\n", tmp1, modulo3, tmp3);
-    printf("Modulo 4 : %s = %s  [ %s ]\n", tmp1, modulo4, tmp4);
-    printf("Modulo 5 : %s = %s  [ %s ]\n", tmp1, modulo5, tmp5);
-    printf("Modulo 6 : %s = %s  [ %s ]\n", tmp1, modulo6, tmp6);
-    printf("Modulo 7 : %s = %s  [ %s ]\n", tmp1, modulo7, tmp7);
-    printf("Modulo 8 : %s = %s  [ %s ]\n", tmp1, modulo8, tmp8);
-    printf("Modulo 9 : %s = %s  [ %s ]\n", tmp2, modulo9, tmp1);
-    printf("Modulo 10 : %s = %s  [ %s ]\n", tmp2, modulo10, tmp2);
-    printf("Modulo 11 : %s = %s  [ %s ]\n", tmp2, modulo11, tmp3);
-    printf("Modulo 12 : %s = %s  [ %s ]\n", tmp2, modulo12, tmp4);
-    printf("Modulo 13 : %s = %s  [ %s ]\n", tmp2, modulo13, tmp5);
-    printf("Modulo 14 : %s = %s  [ %s ]\n", tmp2, modulo14, tmp6);
-    printf("Modulo 15 : %s = %s  [ %s ]\n", tmp2, modulo15, tmp7);
-    printf("Modulo 16 : %s = %s  [ %s ]\n", tmp2, modulo16, tmp8);
-    printf("Modulo 17 : %s = %s  [ %s ]\n", tmp3, modulo17, tmp1);
-    printf("Modulo 18 : %s = %s  [ %s ]\n", tmp3, modulo18, tmp2);
-    printf("Modulo 19 : %s = %s  [ %s ]\n", tmp3, modulo19, tmp3);
-    printf("Modulo 20 : %s = %s  [ %s ]\n", tmp3, modulo20, tmp4);
-    printf("Modulo 21 : %s = %s  [ %s ]\n", tmp3, modulo21, tmp5);
-    printf("Modulo 22 : %s = %s  [ %s ]\n", tmp3, modulo22, tmp6);
-    printf("Modulo 23 : %s = %s  [ %s ]\n", tmp3, modulo23, tmp7);
-    printf("Modulo 24 : %s = %s  [ %s ]\n", tmp3, modulo24, tmp8);
-    printf("Modulo 25 : %s = %s  [ %s ]\n", tmp4, modulo25, tmp1);
-    printf("Modulo 26 : %s = %s  [ %s ]\n", tmp4, modulo26, tmp2);
-    printf("Modulo 27 : %s = %s  [ %s ]\n", tmp4, modulo27, tmp3);
-    printf("Modulo 28 : %s = %s  [ %s ]\n", tmp4, modulo28, tmp4);
-    printf("Modulo 29 : %s = %s  [ %s ]\n", tmp4, modulo29, tmp5);
-    printf("Modulo 30 : %s = %s  [ %s ]\n", tmp4, modulo30, tmp6);
-    printf("Modulo 31 : %s = %s  [ %s ]\n", tmp4, modulo31, tmp7);
-    printf("Modulo 32 : %s = %s  [ %s ]\n", tmp4, modulo32, tmp8);
-    printf("Modulo 33 : %s = %s  [ %s ]\n", tmp5, modulo33, tmp1);
-    printf("Modulo 34 : %s = %s  [ %s ]\n", tmp5, modulo34, tmp2);
-    printf("Modulo 35 : %s = %s  [ %s ]\n", tmp5, modulo35, tmp3);
-    printf("Modulo 36 : %s = %s  [ %s ]\n", tmp5, modulo36, tmp4);
-    printf("Modulo 37 : %s = %s  [ %s ]\n", tmp5, modulo37, tmp5);
-    printf("Modulo 38 : %s = %s  [ %s ]\n", tmp5, modulo38, tmp6);
-    printf("Modulo 39 : %s = %s  [ %s ]\n", tmp5, modulo39, tmp7);
-    printf("Modulo 40 : %s = %s  [ %s ]\n", tmp5, modulo40, tmp8);
-    printf("Modulo 41 : %s = %s  [ %s ]\n", tmp6, modulo41, tmp1);
-    printf("Modulo 42 : %s = %s  [ %s ]\n", tmp6, modulo42, tmp2);
-    printf("Modulo 43 : %s = %s  [ %s ]\n", tmp6, modulo43, tmp3);
-    printf("Modulo 44 : %s = %s  [ %s ]\n", tmp6, modulo44, tmp4);
-    printf("Modulo 45 : %s = %s  [ %s ]\n", tmp6, modulo45, tmp5);
-    printf("Modulo 46 : %s = %s  [ %s ]\n", tmp6, modulo46, tmp6);
-    printf("Modulo 47 : %s = %s  [ %s ]\n", tmp6, modulo47, tmp7);
-    printf("Modulo 48 : %s = %s  [ %s ]\n", tmp6, modulo48, tmp8);
-    printf("Modulo 49 : %s = %s  [ %s ]\n", tmp7, modulo49, tmp1);
-    printf("Modulo 50 : %s = %s  [ %s ]\n", tmp7, modulo50, tmp2);
-    printf("Modulo 51 : %s = %s  [ %s ]\n", tmp7, modulo51, tmp3);
-    printf("Modulo 52 : %s = %s  [ %s ]\n", tmp7, modulo52, tmp4);
-    printf("Modulo 53 : %s = %s  [ %s ]\n", tmp7, modulo53, tmp5);
-    printf("Modulo 54 : %s = %s  [ %s ]\n", tmp7, modulo54, tmp6);
-    printf("Modulo 55 : %s = %s  [ %s ]\n", tmp7, modulo55, tmp7);
-    printf("Modulo 56 : %s = %s  [ %s ]\n", tmp7, modulo56, tmp8);
-    printf("Modulo 57 : %s = %s  [ %s ]\n", tmp8, modulo57, tmp1);
-    printf("Modulo 58 : %s = %s  [ %s ]\n", tmp8, modulo58, tmp2);
-    printf("Modulo 59 : %s = %s  [ %s ]\n", tmp8, modulo59, tmp3);
-    printf("Modulo 60 : %s = %s  [ %s ]\n", tmp8, modulo60, tmp4);
-    printf("Modulo 61 : %s = %s  [ %s ]\n", tmp8, modulo61, tmp5);
-    printf("Modulo 62 : %s = %s  [ %s ]\n", tmp8, modulo62, tmp6);
-    printf("Modulo 63 : %s = %s  [ %s ]\n", tmp8, modulo63, tmp7);
-    printf("Modulo 64 : %s = %s  [ %s ]\n", tmp8, modulo64, tmp8);
+    printf("Modulo 1 : %s = %s  [ %s ]\n", tmp1, tmp_modulo1, tmp1);
+    printf("Modulo 2 : %s = %s  [ %s ]\n", tmp1, tmp_modulo2, tmp2);
+    printf("Modulo 3 : %s = %s  [ %s ]\n", tmp1, tmp_modulo3, tmp3);
+    printf("Modulo 4 : %s = %s  [ %s ]\n", tmp1, tmp_modulo4, tmp4);
+    printf("Modulo 5 : %s = %s  [ %s ]\n", tmp1, tmp_modulo5, tmp5);
+    printf("Modulo 6 : %s = %s  [ %s ]\n", tmp1, tmp_modulo6, tmp6);
+    printf("Modulo 7 : %s = %s  [ %s ]\n", tmp1, tmp_modulo7, tmp7);
+    printf("Modulo 8 : %s = %s  [ %s ]\n", tmp1, tmp_modulo8, tmp8);
+    printf("Modulo 9 : %s = %s  [ %s ]\n", tmp2, tmp_modulo9, tmp1);
+    printf("Modulo 10 : %s = %s  [ %s ]\n", tmp2, tmp_modulo10, tmp2);
+    printf("Modulo 11 : %s = %s  [ %s ]\n", tmp2, tmp_modulo11, tmp3);
+    printf("Modulo 12 : %s = %s  [ %s ]\n", tmp2, tmp_modulo12, tmp4);
+    printf("Modulo 13 : %s = %s  [ %s ]\n", tmp2, tmp_modulo13, tmp5);
+    printf("Modulo 14 : %s = %s  [ %s ]\n", tmp2, tmp_modulo14, tmp6);
+    printf("Modulo 15 : %s = %s  [ %s ]\n", tmp2, tmp_modulo15, tmp7);
+    printf("Modulo 16 : %s = %s  [ %s ]\n", tmp2, tmp_modulo16, tmp8);
+    printf("Modulo 17 : %s = %s  [ %s ]\n", tmp3, tmp_modulo17, tmp1);
+    printf("Modulo 18 : %s = %s  [ %s ]\n", tmp3, tmp_modulo18, tmp2);
+    printf("Modulo 19 : %s = %s  [ %s ]\n", tmp3, tmp_modulo19, tmp3);
+    printf("Modulo 20 : %s = %s  [ %s ]\n", tmp3, tmp_modulo20, tmp4);
+    printf("Modulo 21 : %s = %s  [ %s ]\n", tmp3, tmp_modulo21, tmp5);
+    printf("Modulo 22 : %s = %s  [ %s ]\n", tmp3, tmp_modulo22, tmp6);
+    printf("Modulo 23 : %s = %s  [ %s ]\n", tmp3, tmp_modulo23, tmp7);
+    printf("Modulo 24 : %s = %s  [ %s ]\n", tmp3, tmp_modulo24, tmp8);
+    printf("Modulo 25 : %s = %s  [ %s ]\n", tmp4, tmp_modulo25, tmp1);
+    printf("Modulo 26 : %s = %s  [ %s ]\n", tmp4, tmp_modulo26, tmp2);
+    printf("Modulo 27 : %s = %s  [ %s ]\n", tmp4, tmp_modulo27, tmp3);
+    printf("Modulo 28 : %s = %s  [ %s ]\n", tmp4, tmp_modulo28, tmp4);
+    printf("Modulo 29 : %s = %s  [ %s ]\n", tmp4, tmp_modulo29, tmp5);
+    printf("Modulo 30 : %s = %s  [ %s ]\n", tmp4, tmp_modulo30, tmp6);
+    printf("Modulo 31 : %s = %s  [ %s ]\n", tmp4, tmp_modulo31, tmp7);
+    printf("Modulo 32 : %s = %s  [ %s ]\n", tmp4, tmp_modulo32, tmp8);
+    printf("Modulo 33 : %s = %s  [ %s ]\n", tmp5, tmp_modulo33, tmp1);
+    printf("Modulo 34 : %s = %s  [ %s ]\n", tmp5, tmp_modulo34, tmp2);
+    printf("Modulo 35 : %s = %s  [ %s ]\n", tmp5, tmp_modulo35, tmp3);
+    printf("Modulo 36 : %s = %s  [ %s ]\n", tmp5, tmp_modulo36, tmp4);
+    printf("Modulo 37 : %s = %s  [ %s ]\n", tmp5, tmp_modulo37, tmp5);
+    printf("Modulo 38 : %s = %s  [ %s ]\n", tmp5, tmp_modulo38, tmp6);
+    printf("Modulo 39 : %s = %s  [ %s ]\n", tmp5, tmp_modulo39, tmp7);
+    printf("Modulo 40 : %s = %s  [ %s ]\n", tmp5, tmp_modulo40, tmp8);
+    printf("Modulo 41 : %s = %s  [ %s ]\n", tmp6, tmp_modulo41, tmp1);
+    printf("Modulo 42 : %s = %s  [ %s ]\n", tmp6, tmp_modulo42, tmp2);
+    printf("Modulo 43 : %s = %s  [ %s ]\n", tmp6, tmp_modulo43, tmp3);
+    printf("Modulo 44 : %s = %s  [ %s ]\n", tmp6, tmp_modulo44, tmp4);
+    printf("Modulo 45 : %s = %s  [ %s ]\n", tmp6, tmp_modulo45, tmp5);
+    printf("Modulo 46 : %s = %s  [ %s ]\n", tmp6, tmp_modulo46, tmp6);
+    printf("Modulo 47 : %s = %s  [ %s ]\n", tmp6, tmp_modulo47, tmp7);
+    printf("Modulo 48 : %s = %s  [ %s ]\n", tmp6, tmp_modulo48, tmp8);
+    printf("Modulo 49 : %s = %s  [ %s ]\n", tmp7, tmp_modulo49, tmp1);
+    printf("Modulo 50 : %s = %s  [ %s ]\n", tmp7, tmp_modulo50, tmp2);
+    printf("Modulo 51 : %s = %s  [ %s ]\n", tmp7, tmp_modulo51, tmp3);
+    printf("Modulo 52 : %s = %s  [ %s ]\n", tmp7, tmp_modulo52, tmp4);
+    printf("Modulo 53 : %s = %s  [ %s ]\n", tmp7, tmp_modulo53, tmp5);
+    printf("Modulo 54 : %s = %s  [ %s ]\n", tmp7, tmp_modulo54, tmp6);
+    printf("Modulo 55 : %s = %s  [ %s ]\n", tmp7, tmp_modulo55, tmp7);
+    printf("Modulo 56 : %s = %s  [ %s ]\n", tmp7, tmp_modulo56, tmp8);
+    printf("Modulo 57 : %s = %s  [ %s ]\n", tmp8, tmp_modulo57, tmp1);
+    printf("Modulo 58 : %s = %s  [ %s ]\n", tmp8, tmp_modulo58, tmp2);
+    printf("Modulo 59 : %s = %s  [ %s ]\n", tmp8, tmp_modulo59, tmp3);
+    printf("Modulo 60 : %s = %s  [ %s ]\n", tmp8, tmp_modulo60, tmp4);
+    printf("Modulo 61 : %s = %s  [ %s ]\n", tmp8, tmp_modulo61, tmp5);
+    printf("Modulo 62 : %s = %s  [ %s ]\n", tmp8, tmp_modulo62, tmp6);
+    printf("Modulo 63 : %s = %s  [ %s ]\n", tmp8, tmp_modulo63, tmp7);
+    printf("Modulo 64 : %s = %s  [ %s ]\n", tmp8, tmp_modulo64, tmp8);
 
-    printf("\n");
-}
-
-int main() {
-
-    char str1[] = "600",
-         str2[] = "-600",
-         str3[] = "1",
-         str4[] = "-1";
-    long long ll1 = "73",
-              ll2 = "-73",
-              ll3 = "0",
-              ll4 = "0";
-    somme(str1, str2, str3, str4, ll1, ll2, ll3, ll4);
-    difference(str1, str2, str3, str4, ll1, ll2, ll3, ll4);
-    produit(str1, str2, str3, str4, ll1, ll2, ll3, ll4);
-    quotient(str1, str2, str3, str4, ll1, ll2, ll3, ll4);
-    modulo(str1, str2, str3, str4, ll1, ll2, ll3, ll4);
-    
 }

@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -g -pedantic
 CLIBS = -lm
 
-ALL = calc_unbounded_int test_unbounded
+ALL = calc_unbounded_int test_unbounded_int
 
 all:$(ALL)
 
