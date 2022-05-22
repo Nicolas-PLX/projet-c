@@ -564,7 +564,7 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
 //Calculer le quotient de la division entiere d'un unbounded_int a par un unbounded_int b
 unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
     if(unbounded_int_is_zero(b)) {
-        return *unbounded_int_creer_zero();
+        abort();
     }
     if(unbounded_int_cmp_unbounted_int_absolute_value(a, b) == -1) {
         return *unbounded_int_creer_zero();
@@ -614,7 +614,13 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
 //Calculer le reste de la division d'un unbounded_int a par un unbounded_int b
 unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
     if(unbounded_int_is_zero(b)) {
-        return *unbounded_int_creer_zero();
+        abort();
+    }
+    if(a.signe == '-') {
+        abort();
+    }
+    if(b.signe == '-') {
+        abort();
     }
     if(unbounded_int_cmp_unbounted_int_absolute_value(a, b) == -1) {
         char *tmp = unbounded_int2string(a);
