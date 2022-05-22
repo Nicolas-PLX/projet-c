@@ -64,6 +64,22 @@ static unbounded_int *unbounded_int_creer() {
     return tmp;
 }
 
+/*Determine si un unbounded_int a est vide
+  Retourne 0 si a n'est pas vide 
+           1 si a est vide  */
+static int unbounded_int_is_empty(unbounded_int a) {
+    if(a.len != 0) {
+        return 0;
+    }
+    if(a.premier != NULL) {
+        return 0;
+    }
+    if(a.dernier != NULL) {
+        return 0;
+    }
+    return 1;
+}
+
 /*Determine si un unbounded_int a est equivalent a 0
   Retourne 0 si a != 0 
            1 si a = 0  */
@@ -591,19 +607,28 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
             reste = cpt % ll;
             char chiffre[SIZE_INT_IN_STRING];
             sprintf(chiffre, "%d", quotient);
-            unbounded_int_ajouter_char_fin(res, chiffre[0]);
             cpt = reste;
+        } else if(cpt == 0) {
+            if(!unbounded_int_is_empty(*res)) {
+                unbounded_int_ajouter_char_fin(res, '0');
+            }
         }
         i = i -> suivant;
     }
-    if(ll <= cpt) {
-            quotient = cpt / ll;
-            reste = cpt % ll;
-            char chiffre[SIZE_INT_IN_STRING];
-            sprintf(chiffre, "%d", quotient);
-            unbounded_int_ajouter_char_fin(res, chiffre[0]);
-            cpt = reste;
+    if(a.signe == '+') {
+        if(b.signe == '+') {
+            res -> signe = '+';
+        } else {
+            res -> signe = '-';
         }
+    } else {
+        if(b.signe == '+') {
+            res -> signe = '-';
+        } else {
+            res -> signe = '+';
+        }
+    }
+
     return *res;
 }
 

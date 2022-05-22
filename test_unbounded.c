@@ -3,7 +3,7 @@
 int main() {
 
     char str1[] = "1500000000000000",
-         str2[] = "-1500000000000000",
+         str2[] = "-15000000000000",
          str3[] = "908",
          str4[] = "-908";
     long long ll1 = 73,
@@ -244,7 +244,7 @@ int main() {
 
     /***************************************************** DIFFERENCE *****************************************************/
     
-    
+    /*
     unbounded_int difference1 = unbounded_int_difference(chiffre1, chiffre1),
                   difference2 = unbounded_int_difference(chiffre1, chiffre2),
                   difference3 = unbounded_int_difference(chiffre1, chiffre3),
@@ -442,7 +442,7 @@ int main() {
 
     printf("\n");
 
-    
+    */
 
     /***************************************************** PRODUIT *****************************************************/
 
