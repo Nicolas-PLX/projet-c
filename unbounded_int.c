@@ -596,6 +596,14 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
         }
         i = i -> suivant;
     }
+    if(ll <= cpt) {
+            quotient = cpt / ll;
+            reste = cpt % ll;
+            char chiffre[SIZE_INT_IN_STRING];
+            sprintf(chiffre, "%d", quotient);
+            unbounded_int_ajouter_char_fin(res, chiffre[0]);
+            cpt = reste;
+        }
     return *res;
 }
 
