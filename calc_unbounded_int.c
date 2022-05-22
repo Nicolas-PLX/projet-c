@@ -100,15 +100,6 @@ static int insertion(liste_variable *liste, variable *a){
     liste->premier = nouveau;
     return 1;
 }
-//Fonction de test pour afficher les variables
-static void print_variable(liste_variable *liste){
-    element *tmp = liste->premier;
-    while(tmp != NULL){
-        printf("%s ", tmp->var->nom);
-        tmp = tmp->suivant;
-    }
-}
-
 
 //Fonction boolean qui regarde si l'option i est présente dans les arguments du main.
 //Renvoie 1 si elle y est, sinon 0
