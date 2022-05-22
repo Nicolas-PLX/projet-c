@@ -564,7 +564,7 @@ unbounded_int unbounded_int_produit( unbounded_int a, unbounded_int b) {
 //Calculer le quotient de la division entiere d'un unbounded_int a par un unbounded_int b
 unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
     if(unbounded_int_is_zero(b)) {
-        printf("On ne peut pas diviser un entier par 0");
+        printf("On ne peut pas diviser un entier par 0.\n");
         abort();
     }
     if(unbounded_int_cmp_unbounted_int_absolute_value(a, b) == -1) {
@@ -615,15 +615,15 @@ unbounded_int unbounded_int_quotient(unbounded_int a, unbounded_int b) {
 //Calculer le reste de la division d'un unbounded_int a par un unbounded_int b
 unbounded_int unbounded_int_modulo( unbounded_int a, unbounded_int b) {
     if(unbounded_int_is_zero(b)) { 
-        printf("On ne peut pas diviser un entier par 0");
+        printf("On ne peut pas diviser un entier par 0.\n");
         abort();
     }
     if(a.signe == '-') {
-        printf("On considère qu'on ne peut pas calculer le modulo d'un nombre négatif");
+        printf("On considère qu'on ne peut pas calculer le modulo d'un nombre négatif.\n");
         abort();
     }
     if(b.signe == '-') {
-        printf("On considère qu'on ne peut pas calculer le modulo d'un nombre négatif");
+        printf("On considère qu'on ne peut pas calculer le modulo d'un nombre négatif.\n");
         abort();
     }
     if(unbounded_int_cmp_unbounted_int_absolute_value(a, b) == -1) {
