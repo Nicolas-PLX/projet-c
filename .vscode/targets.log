@@ -2,6 +2,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 3.81
 # Copyright (C) 2006  Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.
+ 
 # There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
 
@@ -10,7 +11,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Sun May 22 09:58:33 2022
+# Make data base, printed on Sun May 22 10:59:28 2022
 
 # Variables
 
@@ -166,9 +167,9 @@ VSCODE_PID = 442
 
 # Directories
 
-# . (device 16777223, inode 59118134): 13 files, no impossibilities.
+# . (device 16777223, inode 59118134): 11 files, no impossibilities.
 
-# 13 files, no impossibilities in 1 directories.
+# 11 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -181,6 +182,7 @@ calc_unbounded_int.c:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 
 # Not a target:
 all:
@@ -188,7 +190,6 @@ all:
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has not been updated.
- 
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -207,7 +208,7 @@ unbounded_int.h:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-22 09:56:33
+#  Last modified 2022-05-22 10:56:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -247,7 +248,7 @@ cleanall:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 13):
-	rm -rf *~ *.o calc_unbouned_int
+	rm -rf *~ *.o calc_unbounded_int
 	
 
 # Not a target:
@@ -269,6 +270,6 @@ unbounded_int.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Sun May 22 09:58:33 2022
+# Finished Make data base on Sun May 22 10:59:28 2022
 
  

@@ -438,6 +438,8 @@ static unbounded_int unbounded_int_difference_simple(unbounded_int a, unbounded_
         unbounded_int_ajouter_char_debut(res, chiffre[0]);
         i = i -> precedent;
     }
+    long long tmp = unbounded_int2ll(*res);
+    *res = ll2unbounded_int(tmp);
     return *res;
 }
 
